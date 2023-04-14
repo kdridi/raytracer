@@ -1,6 +1,7 @@
-cmake_minimum_required(VERSION 3.25)
-project(raytracer)
+cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+project(raytracer VERSION 0.1 LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 23)
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+add_subdirectory(vendor/github.com/google/googletest.git)
 
-add_executable(raytracer main.cpp)
+add_subdirectory(raytracer)
