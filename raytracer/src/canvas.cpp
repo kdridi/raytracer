@@ -33,6 +33,20 @@ void Canvas::writePixel(int x, int y, const Color &color)
     m_pixels[y][x] = color;
 }
 
+void Canvas::drawCircle(int x, int y, int radius, const Color &color)
+{
+    for (int i = -radius; i <= radius; i++) {
+        for (int j = -radius; j <= radius; j++) {
+            if (i * i + j * j <= radius * radius) {
+                int px = x + i;
+                int py = y + j;
+                if (px >= 0 && px < m_width && py >= 0 && py < m_height)
+                    writePixel(px, py, color);
+            }
+        }
+    }
+}
+
 std::string Canvas::toPPM() const
 {
     std::stringstream ss;

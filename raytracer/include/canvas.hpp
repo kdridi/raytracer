@@ -22,6 +22,7 @@ namespace raytracer {
         int height() const;
         Color pixelAt(int, int) const;
         void writePixel(int, int, const Color &);
+        void drawCircle(int, int, int, const Color &);
 
     public:
         std::string toPPM() const;

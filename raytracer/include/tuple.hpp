@@ -9,11 +9,11 @@ namespace raytracer {
         Tuple(double x, double y, double z, double w);
         virtual ~Tuple() = default;
 
-        Tuple(const Tuple &);
-        Tuple &operator=(const Tuple &);
+        Tuple(const Tuple &) = default;
+        Tuple &operator=(const Tuple &) = default;
 
-        Tuple(Tuple &&);
-        Tuple &operator=(Tuple &&);
+        Tuple(Tuple &&) = default;
+        Tuple &operator=(Tuple &&) = default;
 
     public:
         bool isPoint() const;
