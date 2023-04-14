@@ -9,6 +9,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+          submodules: recursive
       - name: Build with Cmake
         run: mkdir build && cd build && cmake .. && make VERBOSE=1
       - name: Run tests
