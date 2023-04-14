@@ -1,0 +1,15 @@
+name: Project
+
+on: [push, pull_request]
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Build with Cmake
+        run: mkdir build && cd build && cmake .. && make VERBOSE=1
+      - name: Run tests
+        run: cd build && raytracer/tests/tests
