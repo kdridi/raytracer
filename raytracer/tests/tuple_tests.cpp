@@ -185,3 +185,19 @@ TEST_F(TupleTest, The_cross_product_of_two_vectors)
     EXPECT_EQ(a.cross(b), raytracer::Vector(-1, 2, -1));
     EXPECT_EQ(b.cross(a), raytracer::Vector(1, -2, 1));
 }
+
+// Reflecting a vector approaching at 45°
+TEST_F(TupleTest, Reflecting_a_vector_approaching_at_45_degrees)
+{
+    raytracer::Vector v(1, -1, 0);
+    raytracer::Vector n(0, 1, 0);
+    EXPECT_TRUE(v.reflect(n) == raytracer::Vector(1, 1, 0));
+}
+
+// Reflecting a vector off a slanted surface
+TEST_F(TupleTest, Reflecting_a_vector_off_a_slanted_surface)
+{
+    raytracer::Vector v(0, -1, 0);
+    raytracer::Vector n(std::sqrt(2) / 2, std::sqrt(2) / 2, 0);
+    EXPECT_TRUE(v.reflect(n) == raytracer::Vector(1, 0, 0));
+}

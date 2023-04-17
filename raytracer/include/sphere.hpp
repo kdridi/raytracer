@@ -18,6 +18,7 @@ namespace raytracer {
 
     public:
         Intersections intersect(const Ray &) const override;
+        Tuple normalAt(const Tuple &) const override;
     };
 
 } // namespace raytracer

@@ -3,6 +3,8 @@ set(TESTS
     canvas_tests.cpp
     color_tests.cpp
     intersections_tests.cpp
+    lights_tests.cpp
+    material_tests.cpp
     matrix_tests.cpp
     ray_tests.cpp
     sphere_tests.cpp

@@ -7,7 +7,22 @@ AShape::AShape()
 {
 }
 
+const Matrix &AShape::transform() const
+{
+    return m_transform;
+}
+
+const Material &AShape::material() const
+{
+    return m_material;
+}
+
 Matrix &AShape::transform()
 {
     return m_transform;
+}
+
+Material &AShape::material()
+{
+    return m_material;
 }

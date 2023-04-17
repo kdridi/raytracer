@@ -4,6 +4,9 @@
 #include "utils.hpp"
 
 namespace raytracer {
+    class Point;
+    class Vector;
+
     class Tuple {
     public:
         static Tuple point(double, double, double);
@@ -21,7 +24,9 @@ namespace raytracer {
 
     public:
         bool isPoint() const;
+        Point asPoint() const;
         bool isVector() const;
+        Vector asVector() const;
 
     public:
         Tuple operator+(const Tuple &) const;
@@ -38,6 +43,7 @@ namespace raytracer {
         Tuple normalize() const;
         double dot(const Tuple &) const;
         Tuple cross(const Tuple &) const;
+        Tuple reflect(const Tuple &) const;
 
     public:
         double x, y, z, w;

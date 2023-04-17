@@ -10,6 +10,12 @@ set(SOURCES
     include/intersections.hpp
     src/intersections.cpp
 
+    include/lights.hpp
+    src/lights.cpp
+
+    include/material.hpp
+    src/material.cpp
+
     include/matrix.hpp
     src/matrix.cpp
 

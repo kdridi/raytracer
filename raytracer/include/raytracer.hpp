@@ -4,6 +4,8 @@
 #include "canvas.hpp"
 #include "color.hpp"
 #include "intersections.hpp"
+#include "lights.hpp"
+#include "material.hpp"
 #include "matrix.hpp"
 #include "point.hpp"
 #include "ray.hpp"

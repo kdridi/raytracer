@@ -1,4 +1,6 @@
 #include "tuple.hpp"
+#include "point.hpp"
+#include "vector.hpp"
 
 std::ostream &operator<<(std::ostream &os, const raytracer::Tuple &tuple)
 {
@@ -33,9 +35,23 @@ bool Tuple::isPoint() const
     return w == 1.0;
 }
 
+Point Tuple::asPoint() const
+{
+    if (!isPoint())
+        throw std::runtime_error("Tuple is not a point");
+    return Point(x, y, z);
+}
+
 bool Tuple::isVector() const
 {
     return w == 0.0;
+}
+
+Vector Tuple::asVector() const
+{
+    if (!isVector())
+        throw std::runtime_error("Tuple is not a vector");
+    return Vector(x, y, z);
 }
 
 Tuple Tuple::operator+(const Tuple &other) const
@@ -119,4 +135,9 @@ double Tuple::dot(const Tuple &other) const
 Tuple Tuple::cross(const Tuple &other) const
 {
     return Tuple(y * other.z - z * other.y, z * other.x - x * other.z, x * other.y - y * other.x, 0.0);
+}
+
+Tuple Tuple::reflect(const Tuple &normal) const
+{
+    return *this - normal * 2 * this->dot(normal);
 }

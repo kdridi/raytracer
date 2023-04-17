@@ -9,11 +9,11 @@ namespace raytracer {
         Point(double x, double y, double z);
         virtual ~Point() = default;
 
-        Point(const Point &);
-        Point &operator=(const Point &);
+        Point(const Point &) = default;
+        Point &operator=(const Point &) = default;
 
-        Point(Point &&);
-        Point &operator=(Point &&);
+        Point(Point &&) = default;
+        Point &operator=(Point &&) = default;
     };
 } // namespace raytracer
 
