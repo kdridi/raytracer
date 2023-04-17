@@ -2,7 +2,10 @@ set(TESTS
     main.cpp
     canvas_tests.cpp
     color_tests.cpp
+    intersections_tests.cpp
     matrix_tests.cpp
+    ray_tests.cpp
+    sphere_tests.cpp
     tuple_tests.cpp
 )
 

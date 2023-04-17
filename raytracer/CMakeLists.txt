@@ -7,11 +7,23 @@ set(SOURCES
     include/color.hpp
     src/color.cpp
 
+    include/intersections.hpp
+    src/intersections.cpp
+
     include/matrix.hpp
     src/matrix.cpp
 
     include/point.hpp
     src/point.cpp
+
+    include/ray.hpp
+    src/ray.cpp
+
+    include/shape.hpp
+    src/shape.cpp
+
+    include/sphere.hpp
+    src/sphere.cpp
 
     include/tuple.hpp
     src/tuple.cpp

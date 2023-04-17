@@ -2,6 +2,7 @@
 #define __UTILS_HPP__
 
 #include <cmath>
+#include <cstddef>
 #include <iostream>
 #include <list>
 #include <sstream>

@@ -2,10 +2,10 @@
 
 #include <gmock/gmock.h>
 
-class Matrix : public testing::Test {};
+class MatrixTest : public testing::Test {};
 
 // Constructing and inspecting a 4x4 matrix
-TEST_F(Matrix, Constructing_and_inspecting_a_4x4_matrix)
+TEST_F(MatrixTest, Constructing_and_inspecting_a_4x4_matrix)
 {
     double values[] =
         {1, 2, 3, 4,
@@ -24,7 +24,7 @@ TEST_F(Matrix, Constructing_and_inspecting_a_4x4_matrix)
 }
 
 // A 2x2 matrix ought to be representable
-TEST_F(Matrix, A_2x2_matrix_ought_to_be_representable)
+TEST_F(MatrixTest, A_2x2_matrix_ought_to_be_representable)
 {
     double values[] =
         {-3, 5,
@@ -38,7 +38,7 @@ TEST_F(Matrix, A_2x2_matrix_ought_to_be_representable)
 }
 
 // A 3x3 matrix ought to be representable
-TEST_F(Matrix, A_3x3_matrix_ought_to_be_representable)
+TEST_F(MatrixTest, A_3x3_matrix_ought_to_be_representable)
 {
     double values[] =
         {-3, 5, 0,
@@ -52,7 +52,7 @@ TEST_F(Matrix, A_3x3_matrix_ought_to_be_representable)
 }
 
 // Matrix equality with identical matrices
-TEST_F(Matrix, Matrix_equality_with_identical_matrices)
+TEST_F(MatrixTest, Matrix_equality_with_identical_matrices)
 {
     double values[] =
         {1, 2, 3, 4,
@@ -66,7 +66,7 @@ TEST_F(Matrix, Matrix_equality_with_identical_matrices)
 }
 
 // Matrix equality with different matrices
-TEST_F(Matrix, Matrix_equality_with_different_matrices)
+TEST_F(MatrixTest, Matrix_equality_with_different_matrices)
 {
     double values1[] =
         {1, 2, 3, 4,
@@ -86,7 +86,7 @@ TEST_F(Matrix, Matrix_equality_with_different_matrices)
 }
 
 // Multiplying two matrices
-TEST_F(Matrix, Multiplying_two_matrices)
+TEST_F(MatrixTest, Multiplying_two_matrices)
 {
     double values1[] =
         {1, 2, 3, 4,
@@ -113,7 +113,7 @@ TEST_F(Matrix, Multiplying_two_matrices)
 }
 
 // A matrix multiplied by a tuple
-TEST_F(Matrix, A_matrix_multiplied_by_a_tuple)
+TEST_F(MatrixTest, A_matrix_multiplied_by_a_tuple)
 {
     double values[] =
         {1, 2, 3, 4,
@@ -128,7 +128,7 @@ TEST_F(Matrix, A_matrix_multiplied_by_a_tuple)
 }
 
 // Multiplying a matrix by the identity matrix
-TEST_F(Matrix, Multiplying_a_matrix_by_the_identity_matrix)
+TEST_F(MatrixTest, Multiplying_a_matrix_by_the_identity_matrix)
 {
     double values[] =
         {0, 1, 2, 4,
@@ -142,14 +142,14 @@ TEST_F(Matrix, Multiplying_a_matrix_by_the_identity_matrix)
 }
 
 // Multiplying the identity matrix by a tuple
-TEST_F(Matrix, Multiplying_the_identity_matrix_by_a_tuple)
+TEST_F(MatrixTest, Multiplying_the_identity_matrix_by_a_tuple)
 {
     raytracer::Tuple a(1, 2, 3, 4);
     EXPECT_TRUE(raytracer::Matrix::identity(4) * a == a);
 }
 
 // Transposing a matrix
-TEST_F(Matrix, Transposing_a_matrix)
+TEST_F(MatrixTest, Transposing_a_matrix)
 {
     double values1[] =
         {0, 9, 3, 0,
@@ -169,14 +169,14 @@ TEST_F(Matrix, Transposing_a_matrix)
 }
 
 // Transposing the identity matrix
-TEST_F(Matrix, Transposing_the_identity_matrix)
+TEST_F(MatrixTest, Transposing_the_identity_matrix)
 {
     raytracer::Matrix a = raytracer::Matrix::identity(4);
     EXPECT_TRUE(a.transpose() == a);
 }
 
 // Calculating the determinant of a 2x2 matrix
-TEST_F(Matrix, Calculating_the_determinant_of_a_2x2_matrix)
+TEST_F(MatrixTest, Calculating_the_determinant_of_a_2x2_matrix)
 {
     double values[] =
         {1, 5,
@@ -187,7 +187,7 @@ TEST_F(Matrix, Calculating_the_determinant_of_a_2x2_matrix)
 }
 
 // A submatrix of a 3x3 matrix is a 2x2 matrix
-TEST_F(Matrix, A_submatrix_of_a_3x3_matrix_is_a_2x2_matrix)
+TEST_F(MatrixTest, A_submatrix_of_a_3x3_matrix_is_a_2x2_matrix)
 {
     double values[] =
         {1, 5, 0,
@@ -204,7 +204,7 @@ TEST_F(Matrix, A_submatrix_of_a_3x3_matrix_is_a_2x2_matrix)
 }
 
 // A submatrix of a 4x4 matrix is a 3x3 matrix
-TEST_F(Matrix, A_submatrix_of_a_4x4_matrix_is_a_3x3_matrix)
+TEST_F(MatrixTest, A_submatrix_of_a_4x4_matrix_is_a_3x3_matrix)
 {
     double values[] =
         {-6, 1, 1, 6,
@@ -223,7 +223,7 @@ TEST_F(Matrix, A_submatrix_of_a_4x4_matrix_is_a_3x3_matrix)
 }
 
 // Calculating a minor of a 3x3 matrix
-TEST_F(Matrix, Calculating_a_minor_of_a_3x3_matrix)
+TEST_F(MatrixTest, Calculating_a_minor_of_a_3x3_matrix)
 {
     double values[] =
         {3, 5, 0,
@@ -237,7 +237,7 @@ TEST_F(Matrix, Calculating_a_minor_of_a_3x3_matrix)
 }
 
 // Calculating a cofactor of a 3x3 matrix
-TEST_F(Matrix, Calculating_a_cofactor_of_a_3x3_matrix)
+TEST_F(MatrixTest, Calculating_a_cofactor_of_a_3x3_matrix)
 {
     double values[] =
         {3, 5, 0,
@@ -252,7 +252,7 @@ TEST_F(Matrix, Calculating_a_cofactor_of_a_3x3_matrix)
 }
 
 // Calculating the determinant of a 3x3 matrix
-TEST_F(Matrix, Calculating_the_determinant_of_a_3x3_matrix)
+TEST_F(MatrixTest, Calculating_the_determinant_of_a_3x3_matrix)
 {
     double values[] =
         {1, 2, 6,
@@ -267,7 +267,7 @@ TEST_F(Matrix, Calculating_the_determinant_of_a_3x3_matrix)
 }
 
 // Calculating the determinant of a 4x4 matrix
-TEST_F(Matrix, Calculating_the_determinant_of_a_4x4_matrix)
+TEST_F(MatrixTest, Calculating_the_determinant_of_a_4x4_matrix)
 {
     double values[] =
         {-2, -8, 3, 5,
@@ -284,7 +284,7 @@ TEST_F(Matrix, Calculating_the_determinant_of_a_4x4_matrix)
 }
 
 // Testing an invertible matrix for invertibility
-TEST_F(Matrix, Testing_an_invertible_matrix_for_invertibility)
+TEST_F(MatrixTest, Testing_an_invertible_matrix_for_invertibility)
 {
     double values[] =
         {6, 4, 4, 4,
@@ -298,7 +298,7 @@ TEST_F(Matrix, Testing_an_invertible_matrix_for_invertibility)
 }
 
 // Testing a noninvertible matrix for invertibility
-TEST_F(Matrix, Testing_a_noninvertible_matrix_for_invertibility)
+TEST_F(MatrixTest, Testing_a_noninvertible_matrix_for_invertibility)
 {
     double values[] =
         {-4, 2, -2, -3,
@@ -312,7 +312,7 @@ TEST_F(Matrix, Testing_a_noninvertible_matrix_for_invertibility)
 }
 
 // Calculating the inverse of a matrix
-TEST_F(Matrix, Calculating_the_inverse_of_a_matrix)
+TEST_F(MatrixTest, Calculating_the_inverse_of_a_matrix)
 {
     double values[] =
         {-5, 2, 6, -8,
@@ -333,7 +333,7 @@ TEST_F(Matrix, Calculating_the_inverse_of_a_matrix)
 }
 
 // Calculating the inverse of another matrix
-TEST_F(Matrix, Calculating_the_inverse_of_another_matrix)
+TEST_F(MatrixTest, Calculating_the_inverse_of_another_matrix)
 {
     double values[] =
         {8, -5, 9, 2,
@@ -354,7 +354,7 @@ TEST_F(Matrix, Calculating_the_inverse_of_another_matrix)
 }
 
 // Calculating the inverse of a third matrix
-TEST_F(Matrix, Calculating_the_inverse_of_a_third_matrix)
+TEST_F(MatrixTest, Calculating_the_inverse_of_a_third_matrix)
 {
     double values[] =
         {9, 3, 0, 9,
@@ -375,7 +375,7 @@ TEST_F(Matrix, Calculating_the_inverse_of_a_third_matrix)
 }
 
 // Multiplying a product by its inverse
-TEST_F(Matrix, Multiplying_a_product_by_its_inverse)
+TEST_F(MatrixTest, Multiplying_a_product_by_its_inverse)
 {
     double values[] =
         {3, -9, 7, 3,
@@ -397,7 +397,7 @@ TEST_F(Matrix, Multiplying_a_product_by_its_inverse)
 }
 
 // Multiplying by a translation matrix
-TEST_F(Matrix, Multiplying_by_a_translation_matrix)
+TEST_F(MatrixTest, Multiplying_by_a_translation_matrix)
 {
     raytracer::Matrix transform = raytracer::Matrix::translation(5, -3, 2);
     raytracer::Tuple p = raytracer::Tuple::point(-3, 4, 5);
@@ -405,7 +405,7 @@ TEST_F(Matrix, Multiplying_by_a_translation_matrix)
 }
 
 // Multiplying by the inverse of a translation matrix
-TEST_F(Matrix, Multiplying_by_the_inverse_of_a_translation_matrix)
+TEST_F(MatrixTest, Multiplying_by_the_inverse_of_a_translation_matrix)
 {
     raytracer::Matrix transform = raytracer::Matrix::translation(5, -3, 2);
     raytracer::Matrix inv = transform.inverse();
@@ -414,7 +414,7 @@ TEST_F(Matrix, Multiplying_by_the_inverse_of_a_translation_matrix)
 }
 
 // Translation does not affect vectors
-TEST_F(Matrix, Translation_does_not_affect_vectors)
+TEST_F(MatrixTest, Translation_does_not_affect_vectors)
 {
     raytracer::Matrix transform = raytracer::Matrix::translation(5, -3, 2);
     raytracer::Tuple v = raytracer::Tuple::vector(-3, 4, 5);
@@ -422,7 +422,7 @@ TEST_F(Matrix, Translation_does_not_affect_vectors)
 }
 
 // A scaling matrix applied to a point
-TEST_F(Matrix, A_scaling_matrix_applied_to_a_point)
+TEST_F(MatrixTest, A_scaling_matrix_applied_to_a_point)
 {
     raytracer::Matrix transform = raytracer::Matrix::scaling(2, 3, 4);
     raytracer::Tuple p = raytracer::Tuple::point(-4, 6, 8);
@@ -430,7 +430,7 @@ TEST_F(Matrix, A_scaling_matrix_applied_to_a_point)
 }
 
 // A scaling matrix applied to a vector
-TEST_F(Matrix, A_scaling_matrix_applied_to_a_vector)
+TEST_F(MatrixTest, A_scaling_matrix_applied_to_a_vector)
 {
     raytracer::Matrix transform = raytracer::Matrix::scaling(2, 3, 4);
     raytracer::Tuple v = raytracer::Tuple::vector(-4, 6, 8);
@@ -438,7 +438,7 @@ TEST_F(Matrix, A_scaling_matrix_applied_to_a_vector)
 }
 
 // Multiplying by the inverse of a scaling matrix
-TEST_F(Matrix, Multiplying_by_the_inverse_of_a_scaling_matrix)
+TEST_F(MatrixTest, Multiplying_by_the_inverse_of_a_scaling_matrix)
 {
     raytracer::Matrix transform = raytracer::Matrix::scaling(2, 3, 4);
     raytracer::Matrix inv = transform.inverse();
@@ -447,7 +447,7 @@ TEST_F(Matrix, Multiplying_by_the_inverse_of_a_scaling_matrix)
 }
 
 // Reflection is scaling by a negative value
-TEST_F(Matrix, Reflection_is_scaling_by_a_negative_value)
+TEST_F(MatrixTest, Reflection_is_scaling_by_a_negative_value)
 {
     raytracer::Matrix transform = raytracer::Matrix::scaling(-1, 1, 1);
     raytracer::Tuple p = raytracer::Tuple::point(2, 3, 4);
@@ -455,7 +455,7 @@ TEST_F(Matrix, Reflection_is_scaling_by_a_negative_value)
 }
 
 // Rotating a point around the x axis
-TEST_F(Matrix, Rotating_a_point_around_the_x_axis)
+TEST_F(MatrixTest, Rotating_a_point_around_the_x_axis)
 {
     raytracer::Tuple p = raytracer::Tuple::point(0, 1, 0);
     raytracer::Matrix half_quarter = raytracer::Matrix::rotationX(M_PI / 4);
@@ -465,7 +465,7 @@ TEST_F(Matrix, Rotating_a_point_around_the_x_axis)
 }
 
 // The inverse of an x-rotation rotates in the opposite direction
-TEST_F(Matrix, The_inverse_of_an_x_rotation_rotates_in_the_opposite_direction)
+TEST_F(MatrixTest, The_inverse_of_an_x_rotation_rotates_in_the_opposite_direction)
 {
     raytracer::Tuple p = raytracer::Tuple::point(0, 1, 0);
     raytracer::Matrix half_quarter = raytracer::Matrix::rotationX(M_PI / 4);
@@ -474,7 +474,7 @@ TEST_F(Matrix, The_inverse_of_an_x_rotation_rotates_in_the_opposite_direction)
 }
 
 // Rotating a point around the y axis
-TEST_F(Matrix, Rotating_a_point_around_the_y_axis)
+TEST_F(MatrixTest, Rotating_a_point_around_the_y_axis)
 {
     raytracer::Tuple p = raytracer::Tuple::point(0, 0, 1);
     raytracer::Matrix half_quarter = raytracer::Matrix::rotationY(M_PI / 4);
@@ -484,7 +484,7 @@ TEST_F(Matrix, Rotating_a_point_around_the_y_axis)
 }
 
 // Rotating a point around the z axis
-TEST_F(Matrix, Rotating_a_point_around_the_z_axis)
+TEST_F(MatrixTest, Rotating_a_point_around_the_z_axis)
 {
     raytracer::Tuple p = raytracer::Tuple::point(0, 1, 0);
     raytracer::Matrix half_quarter = raytracer::Matrix::rotationZ(M_PI / 4);
@@ -494,7 +494,7 @@ TEST_F(Matrix, Rotating_a_point_around_the_z_axis)
 }
 
 // A shearing transformation moves x in proportion to y
-TEST_F(Matrix, A_shearing_transformation_moves_x_in_proportion_to_y)
+TEST_F(MatrixTest, A_shearing_transformation_moves_x_in_proportion_to_y)
 {
     raytracer::Matrix transform = raytracer::Matrix::shearing(1, 0, 0, 0, 0, 0);
     raytracer::Tuple p = raytracer::Tuple::point(2, 3, 4);
@@ -502,7 +502,7 @@ TEST_F(Matrix, A_shearing_transformation_moves_x_in_proportion_to_y)
 }
 
 // A shearing transformation moves x in proportion to z
-TEST_F(Matrix, A_shearing_transformation_moves_x_in_proportion_to_z)
+TEST_F(MatrixTest, A_shearing_transformation_moves_x_in_proportion_to_z)
 {
     raytracer::Matrix transform = raytracer::Matrix::shearing(0, 1, 0, 0, 0, 0);
     raytracer::Tuple p = raytracer::Tuple::point(2, 3, 4);
@@ -510,7 +510,7 @@ TEST_F(Matrix, A_shearing_transformation_moves_x_in_proportion_to_z)
 }
 
 // A shearing transformation moves y in proportion to x
-TEST_F(Matrix, A_shearing_transformation_moves_y_in_proportion_to_x)
+TEST_F(MatrixTest, A_shearing_transformation_moves_y_in_proportion_to_x)
 {
     raytracer::Matrix transform = raytracer::Matrix::shearing(0, 0, 1, 0, 0, 0);
     raytracer::Tuple p = raytracer::Tuple::point(2, 3, 4);
@@ -518,7 +518,7 @@ TEST_F(Matrix, A_shearing_transformation_moves_y_in_proportion_to_x)
 }
 
 // A shearing transformation moves y in proportion to z
-TEST_F(Matrix, A_shearing_transformation_moves_y_in_proportion_to_z)
+TEST_F(MatrixTest, A_shearing_transformation_moves_y_in_proportion_to_z)
 {
     raytracer::Matrix transform = raytracer::Matrix::shearing(0, 0, 0, 1, 0, 0);
     raytracer::Tuple p = raytracer::Tuple::point(2, 3, 4);
@@ -526,7 +526,7 @@ TEST_F(Matrix, A_shearing_transformation_moves_y_in_proportion_to_z)
 }
 
 // A shearing transformation moves z in proportion to x
-TEST_F(Matrix, A_shearing_transformation_moves_z_in_proportion_to_x)
+TEST_F(MatrixTest, A_shearing_transformation_moves_z_in_proportion_to_x)
 {
     raytracer::Matrix transform = raytracer::Matrix::shearing(0, 0, 0, 0, 1, 0);
     raytracer::Tuple p = raytracer::Tuple::point(2, 3, 4);
@@ -534,7 +534,7 @@ TEST_F(Matrix, A_shearing_transformation_moves_z_in_proportion_to_x)
 }
 
 // A shearing transformation moves z in proportion to y
-TEST_F(Matrix, A_shearing_transformation_moves_z_in_proportion_to_y)
+TEST_F(MatrixTest, A_shearing_transformation_moves_z_in_proportion_to_y)
 {
     raytracer::Matrix transform = raytracer::Matrix::shearing(0, 0, 0, 0, 0, 1);
     raytracer::Tuple p = raytracer::Tuple::point(2, 3, 4);
@@ -542,7 +542,7 @@ TEST_F(Matrix, A_shearing_transformation_moves_z_in_proportion_to_y)
 }
 
 // Individual transformations are applied in sequence
-TEST_F(Matrix, Individual_transformations_are_applied_in_sequence)
+TEST_F(MatrixTest, Individual_transformations_are_applied_in_sequence)
 {
     raytracer::Tuple p = raytracer::Tuple::point(1, 0, 1);
     raytracer::Matrix A = raytracer::Matrix::rotationX(M_PI / 2);
@@ -557,7 +557,7 @@ TEST_F(Matrix, Individual_transformations_are_applied_in_sequence)
 }
 
 // Chained transformations must be applied in reverse order
-TEST_F(Matrix, Chained_transformations_must_be_applied_in_reverse_order)
+TEST_F(MatrixTest, Chained_transformations_must_be_applied_in_reverse_order)
 {
     raytracer::Tuple p = raytracer::Tuple::point(1, 0, 1);
     raytracer::Matrix A = raytracer::Matrix::rotationX(M_PI / 2);
