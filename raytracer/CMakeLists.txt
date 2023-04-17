@@ -7,6 +7,9 @@ set(SOURCES
     include/color.hpp
     src/color.cpp
 
+    include/matrix.hpp
+    src/matrix.cpp
+
     include/point.hpp
     src/point.cpp
 

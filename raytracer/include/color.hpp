@@ -6,6 +6,13 @@
 namespace raytracer {
     class Color {
     public:
+        static Color Black() { return Color(0, 0, 0); }
+        static Color White() { return Color(1, 1, 1); }
+        static Color Red() { return Color(1, 0, 0); }
+        static Color Green() { return Color(0, 1, 0); }
+        static Color Blue() { return Color(0, 0, 1); }
+
+    public:
         Color(double red, double green, double blue);
         virtual ~Color() = default;
 

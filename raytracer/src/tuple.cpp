@@ -13,6 +13,16 @@ raytracer::Tuple operator*(double scalar, const raytracer::Tuple &tuple)
 
 using namespace raytracer;
 
+Tuple Tuple::point(double x, double y, double z)
+{
+    return Tuple(x, y, z, 1.0);
+}
+
+Tuple Tuple::vector(double x, double y, double z)
+{
+    return Tuple(x, y, z, 0.0);
+}
+
 Tuple::Tuple(double x, double y, double z, double w)
     : x(x), y(y), z(z), w(w)
 {
@@ -40,7 +50,7 @@ Tuple Tuple::operator-(const Tuple &other) const
 
 bool Tuple::operator==(const Tuple &other) const
 {
-    return x == other.x && y == other.y && z == other.z && w == other.w;
+    return double_equals(x, other.x) && double_equals(y, other.y) && double_equals(z, other.z) && double_equals(w, other.w);
 }
 
 Tuple Tuple::operator-() const
@@ -56,6 +66,38 @@ Tuple Tuple::operator*(double scalar) const
 Tuple Tuple::operator/(double scalar) const
 {
     return Tuple(x / scalar, y / scalar, z / scalar, w / scalar);
+}
+
+double &Tuple::operator[](int index)
+{
+    switch (index) {
+    case 0:
+        return x;
+    case 1:
+        return y;
+    case 2:
+        return z;
+    case 3:
+        return w;
+    default:
+        throw std::out_of_range("Tuple index out of range");
+    }
+}
+
+double Tuple::operator[](int index) const
+{
+    switch (index) {
+    case 0:
+        return x;
+    case 1:
+        return y;
+    case 2:
+        return z;
+    case 3:
+        return w;
+    default:
+        throw std::out_of_range("Tuple index out of range");
+    }
 }
 
 double Tuple::magnitude() const

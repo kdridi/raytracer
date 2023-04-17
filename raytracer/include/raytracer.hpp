@@ -3,6 +3,7 @@
 
 #include "canvas.hpp"
 #include "color.hpp"
+#include "matrix.hpp"
 #include "point.hpp"
 #include "tuple.hpp"
 #include "vector.hpp"

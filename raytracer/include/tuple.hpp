@@ -6,6 +6,10 @@
 namespace raytracer {
     class Tuple {
     public:
+        static Tuple point(double, double, double);
+        static Tuple vector(double, double, double);
+
+    public:
         Tuple(double x, double y, double z, double w);
         virtual ~Tuple() = default;
 
@@ -26,6 +30,8 @@ namespace raytracer {
         Tuple operator-() const;
         Tuple operator*(double) const;
         Tuple operator/(double) const;
+        double &operator[](int);
+        double operator[](int) const;
 
     public:
         double magnitude() const;
