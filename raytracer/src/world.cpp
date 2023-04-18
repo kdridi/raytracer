@@ -47,10 +47,10 @@ Intersections World::intersect(const Ray &ray) const
     return xs;
 }
 
-Color World::shadeHit(const Computations &comps) const
+Color World::shadeHit(const Computations &comps, const Shape &shape) const
 {
     bool shadowed = isShadowed(comps.overPoint);
-    return comps.shape.material().lighting(*light(), comps.point, comps.eyev, comps.normalv, shadowed);
+    return comps.shape.material().lighting(shape, *light(), comps.point, comps.eyev, comps.normalv, shadowed);
 }
 
 Color World::colorAt(const Ray &ray) const
@@ -59,7 +59,7 @@ Color World::colorAt(const Ray &ray) const
     auto hit = xs.hit();
     if (hit != nullptr) {
         auto comps = hit->prepareComputations(ray);
-        return shadeHit(comps);
+        return shadeHit(comps, hit->shape());
     }
     return Color(0, 0, 0);
 }

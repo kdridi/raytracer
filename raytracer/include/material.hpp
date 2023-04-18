@@ -2,6 +2,7 @@
 #define __MATERIAL_HPP__
 
 #include "color.hpp"
+#include "pattern.hpp"
 
 namespace raytracer {
     class Point;
@@ -11,7 +12,7 @@ namespace raytracer {
     class Material {
     public:
         Material();
-        virtual ~Material() = default;
+        ~Material();
 
         Material(const Material &) = default;
         Material &operator=(const Material &) = default;
@@ -29,8 +30,10 @@ namespace raytracer {
         double &specular();
         double &shininess();
 
+        APattern *pattern;
+
     public:
-        Color lighting(const PointLight &light, const Point &point, const Vector &eyev, const Vector &normalv, bool inShadow = false) const;
+        Color lighting(const Shape &shape, const PointLight &light, const Point &point, const Vector &eyev, const Vector &normalv, bool inShadow = false) const;
 
     private:
         Color m_color;

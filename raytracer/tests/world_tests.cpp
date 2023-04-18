@@ -67,7 +67,7 @@ TEST_F(WorldTest, Shading_an_intersection)
     raytracer::Ray r(raytracer::Point(0, 0, -5), raytracer::Vector(0, 0, 1));
     raytracer::Intersection i(4, *w.shapes()[0]);
     raytracer::Computations comps = i.prepareComputations(r);
-    raytracer::Color c = w.shadeHit(comps);
+    raytracer::Color c = w.shadeHit(comps, i.shape());
     EXPECT_TRUE(c == raytracer::Color(0.38066, 0.47583, 0.2855));
 }
 
@@ -77,10 +77,11 @@ TEST_F(WorldTest, Shading_an_intersection)
 //     raytracer::World w = raytracer::World::Default();
 //     w.light() = new raytracer::PointLight(raytracer::Point(0, 0.25, 0), raytracer::Color(1, 1, 1));
 //     raytracer::Ray r(raytracer::Point(0, 0, 0), raytracer::Vector(0, 0, 1));
-//     raytracer::Intersection i(0.5, *w.shapes()[1]);
+//     raytracer::Shape *s = w.shapes()[1];
+//     raytracer::Intersection i(0.5, *s);
 //     raytracer::Computations comps = i.prepareComputations(r);
-//     raytracer::Color c = w.shadeHit(comps);
-//     std::cout << "red = " << c.red() << ", green = " << c.green() << ", blue = " << c.blue() << std::endl;
+//     raytracer::Color c = w.shadeHit(comps, i.shape());
+//     std::cout << "color: " << c << std::endl;
 //     EXPECT_TRUE(c == raytracer::Color(0.90498, 0.90498, 0.90498));
 // }
 
@@ -160,6 +161,6 @@ TEST_F(WorldTest, ShadeHit_is_given_an_intersection_in_shadow)
     raytracer::Ray r(raytracer::Point(0, 0, 5), raytracer::Vector(0, 0, 1));
     raytracer::Intersection i(4, *s2);
     raytracer::Computations comps = i.prepareComputations(r);
-    raytracer::Color c = w.shadeHit(comps);
+    raytracer::Color c = w.shadeHit(comps, i.shape());
     EXPECT_TRUE(c == raytracer::Color(0.1, 0.1, 0.1));
 }

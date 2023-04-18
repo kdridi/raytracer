@@ -9,6 +9,8 @@ int main()
     floor->material() = raytracer::Material();
     floor->material().color() = raytracer::Color(1, 0.9, 0.9);
     floor->material().specular() = 0;
+    floor->material().pattern = new raytracer::RingPattern(raytracer::Color::Red(), raytracer::Color::White());
+    // floor->material().pattern->transform = raytracer::Matrix::scaling(1, 0, 1);
     world.shapes().push_back(floor);
 
     raytracer::Sphere *middle = new raytracer::Sphere();
@@ -17,6 +19,8 @@ int main()
     middle->material().color() = raytracer::Color(0.1, 1, 0.5);
     middle->material().diffuse() = 0.7;
     middle->material().specular() = 0.3;
+    middle->material().pattern = new raytracer::PerlinPattern(raytracer::Color::Green(), raytracer::Color::Blue());
+    middle->material().pattern->transform = raytracer::Matrix::scaling(0.25, 0.25, 0.25);
     world.shapes().push_back(middle);
 
     raytracer::Sphere *right = new raytracer::Sphere();

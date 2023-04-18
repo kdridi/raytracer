@@ -6,8 +6,14 @@
 using namespace raytracer;
 
 Material::Material()
-    : m_color(Color::White()), m_ambient(0.1), m_diffuse(0.9), m_specular(0.9), m_shininess(200.0)
+    : m_color(Color::White()), m_ambient(0.1), m_diffuse(0.9), m_specular(0.9), m_shininess(200.0), pattern(nullptr)
 {
+}
+
+Material::~Material()
+{
+    if (pattern != nullptr)
+        delete pattern;
 }
 
 bool Material::operator==(const Material &other) const
@@ -40,10 +46,15 @@ double &Material::shininess()
     return m_shininess;
 }
 
-Color Material::lighting(const PointLight &light, const Point &point, const Vector &eyev, const Vector &normalv, bool inShadow) const
+Color Material::lighting(const Shape &shape, const PointLight &light, const Point &point, const Vector &eyev, const Vector &normalv, bool inShadow) const
 {
+    Color color = m_color;
+
+    if (pattern != nullptr)
+        color = pattern->patternAtShape(shape, point);
+
     // Combine the surface color with the light's color/intensity
-    Color effective_color = m_color * light.intensity();
+    Color effective_color = color * light.intensity();
 
     // Find the direction to the light source
     Vector lightv = (light.position() - point).normalize().asVector();

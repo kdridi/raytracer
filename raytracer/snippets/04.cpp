@@ -56,7 +56,7 @@ int main(void)
                 raytracer::Vector normal = i->shape().normalAt(point).asVector();
                 raytracer::Vector eye = (-r.direction()).asVector();
 
-                raytracer::Color color = i->shape().material().lighting(light, point, eye, normal);
+                raytracer::Color color = i->shape().material().lighting(i->shape(), light, point, eye, normal);
 
                 c.writePixel(x, y, color);
             }

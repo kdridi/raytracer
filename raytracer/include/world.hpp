@@ -35,7 +35,7 @@ namespace raytracer {
 
     public:
         Intersections intersect(const Ray &ray) const;
-        Color shadeHit(const Computations &comps) const;
+        Color shadeHit(const Computations &comps, const Shape &shape) const;
         Color colorAt(const Ray &ray) const;
         bool isShadowed(const Point &point) const;
 
