@@ -30,7 +30,7 @@ namespace raytracer {
         double &shininess();
 
     public:
-        Color lighting(const PointLight &light, const Point &point, const Vector &eyev, const Vector &normalv) const;
+        Color lighting(const PointLight &light, const Point &point, const Vector &eyev, const Vector &normalv, bool inShadow = false) const;
 
     private:
         Color m_color;

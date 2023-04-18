@@ -5,7 +5,7 @@
 using namespace raytracer;
 
 Computations::Computations(const Intersection &intersection, const Ray &ray)
-    : t(intersection.t()), shape(intersection.shape()), point(ray.position(t).asPoint()), eyev((-ray.direction()).asVector()), normalv(shape.normalAt(point).asVector()), inside(false)
+    : t(intersection.t()), shape(intersection.shape()), point(ray.position(t).asPoint()), eyev((-ray.direction()).asVector()), normalv(shape.normalAt(point).asVector()), inside(false), overPoint((point + normalv * EPSILON).asPoint())
 {
     if (normalv.dot(eyev) < 0) {
         inside = true;

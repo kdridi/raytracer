@@ -41,3 +41,54 @@ TEST_F(DefaultMaterialTest, Lighting_with_the_eye_between_the_light_and_the_surf
     raytracer::Color result = m.lighting(light, position, eyev, normalv);
     EXPECT_TRUE(result == raytracer::Color(1.9, 1.9, 1.9));
 }
+
+// Lighting with the eye between light and surface, eye offset 45 degrees
+TEST_F(DefaultMaterialTest, Lighting_with_the_eye_between_light_and_surface_eye_offset_45_degrees)
+{
+    raytracer::PointLight light(raytracer::Point(0, 0, -10), raytracer::Color(1, 1, 1));
+    raytracer::Vector eyev(0, std::sqrt(2) / 2, -std::sqrt(2) / 2);
+    raytracer::Vector normalv(0, 0, -1);
+    raytracer::Color result = m.lighting(light, position, eyev, normalv);
+    EXPECT_TRUE(result == raytracer::Color(1.0, 1.0, 1.0));
+}
+
+// Lighting with eye opposite surface, light offset 45 degrees
+TEST_F(DefaultMaterialTest, Lighting_with_eye_opposite_surface_light_offset_45_degrees)
+{
+    raytracer::PointLight light(raytracer::Point(0, 10, -10), raytracer::Color(1, 1, 1));
+    raytracer::Vector eyev(0, 0, -1);
+    raytracer::Vector normalv(0, 0, -1);
+    raytracer::Color result = m.lighting(light, position, eyev, normalv);
+    EXPECT_TRUE(result == raytracer::Color(0.7364, 0.7364, 0.7364));
+}
+
+// Lighting with eye in the path of the reflection vector
+TEST_F(DefaultMaterialTest, Lighting_with_eye_in_the_path_of_the_reflection_vector)
+{
+    raytracer::PointLight light(raytracer::Point(0, 10, -10), raytracer::Color(1, 1, 1));
+    raytracer::Vector eyev(0, -std::sqrt(2) / 2, -std::sqrt(2) / 2);
+    raytracer::Vector normalv(0, 0, -1);
+    raytracer::Color result = m.lighting(light, position, eyev, normalv);
+    EXPECT_TRUE(result == raytracer::Color(1.6364, 1.6364, 1.6364));
+}
+
+// Lighting with the light behind the surface
+TEST_F(DefaultMaterialTest, Lighting_with_the_light_behind_the_surface)
+{
+    raytracer::PointLight light(raytracer::Point(0, 0, 10), raytracer::Color(1, 1, 1));
+    raytracer::Vector eyev(0, 0, -1);
+    raytracer::Vector normalv(0, 0, -1);
+    raytracer::Color result = m.lighting(light, position, eyev, normalv);
+    EXPECT_TRUE(result == raytracer::Color(0.1, 0.1, 0.1));
+}
+
+// Lighting with the surface in shadow
+TEST_F(DefaultMaterialTest, Lighting_with_the_surface_in_shadow)
+{
+    raytracer::PointLight light(raytracer::Point(0, 0, -10), raytracer::Color(1, 1, 1));
+    raytracer::Vector eyev(0, 0, -1);
+    raytracer::Vector normalv(0, 0, -1);
+    bool inShadow = true;
+    raytracer::Color result = m.lighting(light, position, eyev, normalv, inShadow);
+    EXPECT_TRUE(result == raytracer::Color(0.1, 0.1, 0.1));
+}

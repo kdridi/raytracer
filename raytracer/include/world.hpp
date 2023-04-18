@@ -10,6 +10,7 @@ namespace raytracer {
     class Computations;
     class Ray;
     class Color;
+    class Point;
 
     class World {
     public:
@@ -36,6 +37,7 @@ namespace raytracer {
         Intersections intersect(const Ray &ray) const;
         Color shadeHit(const Computations &comps) const;
         Color colorAt(const Ray &ray) const;
+        bool isShadowed(const Point &point) const;
 
     private:
         std::vector<Shape *> m_shapes;

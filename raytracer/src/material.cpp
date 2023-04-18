@@ -40,7 +40,7 @@ double &Material::shininess()
     return m_shininess;
 }
 
-Color Material::lighting(const PointLight &light, const Point &point, const Vector &eyev, const Vector &normalv) const
+Color Material::lighting(const PointLight &light, const Point &point, const Vector &eyev, const Vector &normalv, bool inShadow) const
 {
     // Combine the surface color with the light's color/intensity
     Color effective_color = m_color * light.intensity();
@@ -50,6 +50,9 @@ Color Material::lighting(const PointLight &light, const Point &point, const Vect
 
     // Compute the ambient contribution
     Color ambient = effective_color * m_ambient;
+
+    if (inShadow)
+        return ambient;
 
     // Light_dot_normal represents the cosine of the angle between the light vector and the normal vector. A negative number means the light is on the other side of the surface.
     double light_dot_normal = lightv.dot(normalv);

@@ -49,7 +49,8 @@ Intersections World::intersect(const Ray &ray) const
 
 Color World::shadeHit(const Computations &comps) const
 {
-    return comps.shape.material().lighting(*light(), comps.point, comps.eyev, comps.normalv);
+    bool shadowed = isShadowed(comps.overPoint);
+    return comps.shape.material().lighting(*light(), comps.point, comps.eyev, comps.normalv, shadowed);
 }
 
 Color World::colorAt(const Ray &ray) const
@@ -61,4 +62,18 @@ Color World::colorAt(const Ray &ray) const
         return shadeHit(comps);
     }
     return Color(0, 0, 0);
+}
+
+bool World::isShadowed(const Point &point) const
+{
+    Vector v = (m_light->position() - point).asVector();
+    double distance = v.magnitude();
+    Vector direction = v.normalize().asVector();
+
+    Ray r(point, direction);
+    auto xs = intersect(r);
+    auto h = xs.hit();
+    if (h != nullptr && h->t() < distance)
+        return true;
+    return false;
 }

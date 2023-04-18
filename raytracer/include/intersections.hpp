@@ -19,6 +19,7 @@ namespace raytracer {
         Vector eyev;
         Vector normalv;
         bool inside;
+        Point overPoint;
     };
 
     class Intersection {

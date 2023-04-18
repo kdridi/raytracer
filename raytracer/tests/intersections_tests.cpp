@@ -107,3 +107,15 @@ TEST_F(IntersectionsTest, The_hit_when_an_intersection_occurs_on_the_inside)
     // normal would have been (0, 0, 1), but is inverted!
     EXPECT_TRUE(comps.normalv == raytracer::Vector(0, 0, -1));
 }
+
+// The hit should offset the point
+TEST_F(IntersectionsTest, The_hit_should_offset_the_point)
+{
+    raytracer::Ray r(raytracer::Point(0, 0, -5), raytracer::Vector(0, 0, 1));
+    raytracer::Sphere s;
+    s.transform() = raytracer::Matrix::translation(0, 0, 1);
+    raytracer::Intersection i(5, s);
+    raytracer::Computations comps = i.prepareComputations(r);
+    EXPECT_TRUE(comps.overPoint.z < -EPSILON / 2);
+    EXPECT_TRUE(comps.point.z > comps.overPoint.z);
+}
