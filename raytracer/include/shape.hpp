@@ -29,6 +29,9 @@ namespace raytracer {
         virtual Matrix &transform();
         virtual Material &material();
 
+        virtual Intersections intersect(const Ray &) const final;
+        virtual Tuple normalAt(const Tuple &) const final;
+
     protected:
         AShape();
         virtual ~AShape() = default;
@@ -38,6 +41,9 @@ namespace raytracer {
 
         AShape(AShape &&) = default;
         AShape &operator=(AShape &&) = default;
+
+        virtual Intersections localIntersect(const Ray &) const = 0;
+        virtual Vector localNormalAt(const Point &) const = 0;
 
     protected:
         Matrix m_transform;

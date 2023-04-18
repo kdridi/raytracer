@@ -14,12 +14,11 @@ bool Sphere::operator==(const Sphere &other) const
     return m_transform == other.m_transform;
 }
 
-Intersections Sphere::intersect(const Ray &ray) const
+Intersections Sphere::localIntersect(const Ray &ray) const
 {
-    Ray object_ray = ray.transform(m_transform.inverse());
-    Tuple sphere_to_ray = object_ray.origin() - Tuple::point(0, 0, 0);
-    double a = object_ray.direction().dot(object_ray.direction());
-    double b = 2 * object_ray.direction().dot(sphere_to_ray);
+    Tuple sphere_to_ray = ray.origin() - Tuple::point(0, 0, 0);
+    double a = ray.direction().dot(ray.direction());
+    double b = 2 * ray.direction().dot(sphere_to_ray);
     double c = sphere_to_ray.dot(sphere_to_ray) - 1;
     double discriminant = b * b - 4 * a * c;
     if (discriminant < 0) {
@@ -32,11 +31,7 @@ Intersections Sphere::intersect(const Ray &ray) const
     }
 }
 
-Tuple Sphere::normalAt(const Tuple &world_point) const
+Vector Sphere::localNormalAt(const Point &localPoint) const
 {
-    Tuple object_point = m_transform.inverse() * world_point;
-    Tuple object_normal = object_point - Tuple::point(0, 0, 0);
-    Tuple world_normal = m_transform.inverse().transpose() * object_normal;
-    world_normal[3] = 0;
-    return world_normal.normalize();
+    return (localPoint - Point(0, 0, 0)).asVector();
 }

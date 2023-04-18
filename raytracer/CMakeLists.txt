@@ -22,6 +22,9 @@ set(SOURCES
     include/matrix.hpp
     src/matrix.cpp
 
+    include/plane.hpp
+    src/plane.cpp
+
     include/point.hpp
     src/point.cpp
 

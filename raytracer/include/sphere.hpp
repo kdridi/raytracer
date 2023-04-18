@@ -20,8 +20,8 @@ namespace raytracer {
         bool operator==(const Sphere &) const;
 
     public:
-        Intersections intersect(const Ray &) const override;
-        Tuple normalAt(const Tuple &) const override;
+        Intersections localIntersect(const Ray &) const override;
+        Vector localNormalAt(const Point &) const override;
     };
 
 } // namespace raytracer

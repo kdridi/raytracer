@@ -7,7 +7,9 @@ set(TESTS
     lights_tests.cpp
     material_tests.cpp
     matrix_tests.cpp
+    plane_tests.cpp
     ray_tests.cpp
+    shape_tests.cpp
     sphere_tests.cpp
     tuple_tests.cpp
     world_tests.cpp

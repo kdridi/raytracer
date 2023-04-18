@@ -8,6 +8,7 @@
 #include "lights.hpp"
 #include "material.hpp"
 #include "matrix.hpp"
+#include "plane.hpp"
 #include "point.hpp"
 #include "ray.hpp"
 #include "shape.hpp"

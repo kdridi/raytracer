@@ -12,3 +12,6 @@ target_link_libraries(04 raytracer)
 
 add_executable(05 05.cpp)
 target_link_libraries(05 raytracer)
+
+add_executable(06 06.cpp)
+target_link_libraries(06 raytracer)
