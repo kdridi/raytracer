@@ -75,6 +75,24 @@ Matrix Matrix::shearing(double xy, double xz, double yx, double yz, double zx, d
     return result;
 }
 
+Matrix Matrix::viewTransform(const Tuple &from, const Tuple &to, const Tuple &up)
+{
+    Tuple forward = (to - from).normalize();
+    Tuple upn = up.normalize();
+    Tuple left = forward.cross(upn);
+    Tuple trueUp = left.cross(forward);
+
+    double values[] = {
+        left.x, left.y, left.z, 0,
+        trueUp.x, trueUp.y, trueUp.z, 0,
+        -forward.x, -forward.y, -forward.z, 0,
+        0, 0, 0, 1};
+
+    Matrix orientation = Matrix(4, 4, values);
+
+    return orientation * Matrix::translation(-from.x, -from.y, -from.z);
+}
+
 Matrix::Matrix(size_t rows, size_t cols)
     : m_rows(rows), m_cols(cols)
 {

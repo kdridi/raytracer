@@ -18,6 +18,9 @@ namespace raytracer {
         PointLight &operator=(PointLight &&) = default;
 
     public:
+        bool operator==(const PointLight &) const;
+
+    public:
         Tuple &position();
         const Tuple &position() const;
         Color &intensity();

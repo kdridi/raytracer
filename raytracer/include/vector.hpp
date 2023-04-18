@@ -9,11 +9,11 @@ namespace raytracer {
         Vector(double x, double y, double z);
         virtual ~Vector() = default;
 
-        Vector(const Vector &);
-        Vector &operator=(const Vector &);
+        Vector(const Vector &) = default;
+        Vector &operator=(const Vector &) = default;
 
-        Vector(Vector &&);
-        Vector &operator=(Vector &&);
+        Vector(Vector &&) = default;
+        Vector &operator=(Vector &&) = default;
     };
 } // namespace raytracer
 

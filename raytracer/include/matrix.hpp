@@ -18,6 +18,7 @@ namespace raytracer {
         static Matrix rotationY(double);
         static Matrix rotationZ(double);
         static Matrix shearing(double, double, double, double, double, double);
+        static Matrix viewTransform(const Tuple &from, const Tuple &to, const Tuple &up);
 
     public:
         Matrix(std::size_t rows, std::size_t cols);

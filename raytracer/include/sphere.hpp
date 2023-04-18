@@ -17,6 +17,9 @@ namespace raytracer {
         Sphere &operator=(Sphere &&) = default;
 
     public:
+        bool operator==(const Sphere &) const;
+
+    public:
         Intersections intersect(const Ray &) const override;
         Tuple normalAt(const Tuple &) const override;
     };

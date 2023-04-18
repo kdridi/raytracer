@@ -566,3 +566,51 @@ TEST_F(MatrixTest, Chained_transformations_must_be_applied_in_reverse_order)
     raytracer::Matrix T = C * B * A;
     EXPECT_TRUE(T * p == raytracer::Tuple::point(15, 0, 7));
 }
+
+// The transformation matrix for the default orientation
+TEST_F(MatrixTest, The_transformation_matrix_for_the_default_orientation)
+{
+    raytracer::Tuple from = raytracer::Tuple::point(0, 0, 0);
+    raytracer::Tuple to = raytracer::Tuple::point(0, 0, -1);
+    raytracer::Tuple up = raytracer::Tuple::vector(0, 1, 0);
+    raytracer::Matrix t = raytracer::Matrix::viewTransform(from, to, up);
+    EXPECT_TRUE(t == raytracer::Matrix::identity(4));
+}
+
+// A view transformation matrix looking in positive z direction
+TEST_F(MatrixTest, A_view_transformation_matrix_looking_in_positive_z_direction)
+{
+    raytracer::Tuple from = raytracer::Tuple::point(0, 0, 0);
+    raytracer::Tuple to = raytracer::Tuple::point(0, 0, 1);
+    raytracer::Tuple up = raytracer::Tuple::vector(0, 1, 0);
+    raytracer::Matrix t = raytracer::Matrix::viewTransform(from, to, up);
+    EXPECT_TRUE(t == raytracer::Matrix::scaling(-1, 1, -1));
+}
+
+// The view transformation moves the world
+TEST_F(MatrixTest, The_view_transformation_moves_the_world)
+{
+    raytracer::Tuple from = raytracer::Tuple::point(0, 0, 8);
+    raytracer::Tuple to = raytracer::Tuple::point(0, 0, 0);
+    raytracer::Tuple up = raytracer::Tuple::vector(0, 1, 0);
+    raytracer::Matrix t = raytracer::Matrix::viewTransform(from, to, up);
+    EXPECT_TRUE(t == raytracer::Matrix::translation(0, 0, -8));
+}
+
+// An arbitrary view transformation
+TEST_F(MatrixTest, An_arbitrary_view_transformation)
+{
+    raytracer::Tuple from = raytracer::Tuple::point(1, 3, 2);
+    raytracer::Tuple to = raytracer::Tuple::point(4, -2, 8);
+    raytracer::Tuple up = raytracer::Tuple::vector(1, 1, 0);
+    raytracer::Matrix t = raytracer::Matrix::viewTransform(from, to, up);
+
+    double values[] = {
+        -0.50709, 0.50709, 0.67612, -2.36643,
+        0.76772, 0.60609, 0.12122, -2.82843,
+        -0.35857, 0.59761, -0.71714, 0.00000,
+        0.00000, 0.00000, 0.00000, 1.00000};
+
+    raytracer::Matrix expected(4, 4, values);
+    EXPECT_TRUE(t == expected);
+}

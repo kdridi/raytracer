@@ -2,10 +2,10 @@
 
 #include <gmock/gmock.h>
 
-class Canvas : public testing::Test {};
+class CanvasTest : public testing::Test {};
 
 // Creating a canvas
-TEST_F(Canvas, Creating_a_canvas)
+TEST_F(CanvasTest, Creating_a_canvas)
 {
     raytracer::Canvas c(10, 20);
     EXPECT_EQ(c.width(), 10);
@@ -16,7 +16,7 @@ TEST_F(Canvas, Creating_a_canvas)
 }
 
 // Writing pixels to a canvas
-TEST_F(Canvas, Writing_pixels_to_a_canvas)
+TEST_F(CanvasTest, Writing_pixels_to_a_canvas)
 {
     raytracer::Canvas c(10, 20);
     raytracer::Color red(1, 0, 0);
@@ -25,7 +25,7 @@ TEST_F(Canvas, Writing_pixels_to_a_canvas)
 }
 
 // Constructing the PPM header
-TEST_F(Canvas, Constructing_the_PPM_header)
+TEST_F(CanvasTest, Constructing_the_PPM_header)
 {
     raytracer::Canvas c(5, 3);
     std::string ppm = c.toPPM();
@@ -43,7 +43,7 @@ TEST_F(Canvas, Constructing_the_PPM_header)
 }
 
 // Constructing the PPM pixel data
-TEST_F(Canvas, Constructing_the_PPM_pixel_data)
+TEST_F(CanvasTest, Constructing_the_PPM_pixel_data)
 {
     raytracer::Canvas c(5, 3);
     raytracer::Color c1(1.5, 0, 0);
@@ -67,7 +67,7 @@ TEST_F(Canvas, Constructing_the_PPM_pixel_data)
 }
 
 // Splitting long lines in PPM files
-TEST_F(Canvas, Splitting_long_lines_in_PPM_files)
+TEST_F(CanvasTest, Splitting_long_lines_in_PPM_files)
 {
     raytracer::Canvas c(10, 2);
     raytracer::Color color(1, 0.8, 0.6);
@@ -90,7 +90,7 @@ TEST_F(Canvas, Splitting_long_lines_in_PPM_files)
 }
 
 // PPM files are terminated by a newline character
-TEST_F(Canvas, PPM_files_are_terminated_by_a_newline_character)
+TEST_F(CanvasTest, PPM_files_are_terminated_by_a_newline_character)
 {
     raytracer::Canvas c(5, 3);
     std::string ppm = c.toPPM();

@@ -1,5 +1,6 @@
 set(TESTS
     main.cpp
+    camera_tests.cpp
     canvas_tests.cpp
     color_tests.cpp
     intersections_tests.cpp
@@ -9,6 +10,7 @@ set(TESTS
     ray_tests.cpp
     sphere_tests.cpp
     tuple_tests.cpp
+    world_tests.cpp
 )
 
 add_executable(tests ${TESTS})

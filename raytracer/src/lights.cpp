@@ -7,6 +7,11 @@ PointLight::PointLight(const Tuple &position, const Color &intensity)
 {
 }
 
+bool PointLight::operator==(const PointLight &other) const
+{
+    return m_position == other.m_position && m_intensity == other.m_intensity;
+}
+
 Tuple &PointLight::position()
 {
     return m_position;

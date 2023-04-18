@@ -25,7 +25,7 @@ int main(void)
     raytracer::Color red(1, 0, 0);
     raytracer::Sphere s;
     s.material() = raytracer::Material();
-    s.material().color() = raytracer::Color(1, 0.2, 1);
+    s.material().color() = raytracer::Color(0.2, 1, 0.3);
 
     raytracer::PointLight light(raytracer::Point(-10, 10, -10), raytracer::Color(1, 1, 1));
 

@@ -1,6 +1,7 @@
 #ifndef __RAYTRACER_HPP__
 #define __RAYTRACER_HPP__
 
+#include "camera.hpp"
 #include "canvas.hpp"
 #include "color.hpp"
 #include "intersections.hpp"
@@ -13,5 +14,6 @@
 #include "sphere.hpp"
 #include "tuple.hpp"
 #include "vector.hpp"
+#include "world.hpp"
 
 #endif // __RAYTRACER_HPP__

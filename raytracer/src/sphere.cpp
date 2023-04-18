@@ -9,6 +9,11 @@ Sphere::Sphere()
 {
 }
 
+bool Sphere::operator==(const Sphere &other) const
+{
+    return m_transform == other.m_transform;
+}
+
 Intersections Sphere::intersect(const Ray &ray) const
 {
     Ray object_ray = ray.transform(m_transform.inverse());

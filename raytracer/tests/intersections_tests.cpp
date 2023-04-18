@@ -69,3 +69,41 @@ TEST_F(IntersectionsTest, The_hit_is_always_the_lowest_nonnegative_intersection)
     EXPECT_TRUE(&xs.hit()->shape() == &s);
     EXPECT_TRUE(double_equals(xs.hit()->t(), 2));
 }
+
+// Precomputing the state of an intersection
+TEST_F(IntersectionsTest, Precomputing_the_state_of_an_intersection)
+{
+    raytracer::Ray r(raytracer::Point(0, 0, -5), raytracer::Vector(0, 0, 1));
+    raytracer::Sphere s;
+    raytracer::Intersection i(4, s);
+    raytracer::Computations comps = i.prepareComputations(r);
+    EXPECT_TRUE(double_equals(comps.t, i.t()));
+    EXPECT_TRUE(&comps.shape == &i.shape());
+    EXPECT_TRUE(comps.point == raytracer::Point(0, 0, -1));
+    EXPECT_TRUE(comps.eyev == raytracer::Vector(0, 0, -1));
+    EXPECT_TRUE(comps.normalv == raytracer::Vector(0, 0, -1));
+}
+
+// The hit, when an intersection occurs on the outside
+TEST_F(IntersectionsTest, The_hit_when_an_intersection_occurs_on_the_outside)
+{
+    raytracer::Ray r(raytracer::Point(0, 0, -5), raytracer::Vector(0, 0, 1));
+    raytracer::Sphere s;
+    raytracer::Intersection i(4, s);
+    raytracer::Computations comps = i.prepareComputations(r);
+    EXPECT_FALSE(comps.inside);
+}
+
+// The hit, when an intersection occurs on the inside
+TEST_F(IntersectionsTest, The_hit_when_an_intersection_occurs_on_the_inside)
+{
+    raytracer::Ray r(raytracer::Point(0, 0, 0), raytracer::Vector(0, 0, 1));
+    raytracer::Sphere s;
+    raytracer::Intersection i(1, s);
+    raytracer::Computations comps = i.prepareComputations(r);
+    EXPECT_TRUE(comps.point == raytracer::Point(0, 0, 1));
+    EXPECT_TRUE(comps.eyev == raytracer::Vector(0, 0, -1));
+    EXPECT_TRUE(comps.inside);
+    // normal would have been (0, 0, 1), but is inverted!
+    EXPECT_TRUE(comps.normalv == raytracer::Vector(0, 0, -1));
+}

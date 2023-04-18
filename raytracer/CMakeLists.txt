@@ -1,6 +1,9 @@
 set(SOURCES
     include/raytracer.hpp
 
+    include/camera.hpp
+    src/camera.cpp
+
     include/canvas.hpp
     src/canvas.cpp
 
@@ -36,6 +39,9 @@ set(SOURCES
 
     include/vector.hpp
     src/vector.cpp
+
+    include/world.hpp
+    src/world.cpp
 )
 
 add_library(raytracer ${SOURCES})
