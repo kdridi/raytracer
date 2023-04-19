@@ -181,3 +181,12 @@ TEST_F(SphereTest, A_sphere_may_be_assigned_a_material)
     s.material() = m;
     EXPECT_TRUE(s.material() == m);
 }
+
+// A helper for producing a sphere with a glassy material
+TEST_F(SphereTest, A_helper_for_producing_a_sphere_with_a_glassy_material)
+{
+    raytracer::GlassSphere s;
+    EXPECT_TRUE(s.transform() == raytracer::Matrix::identity(4));
+    EXPECT_TRUE(s.material().transparency == 1.0);
+    EXPECT_TRUE(s.material().refractiveIndex == 1.5);
+}

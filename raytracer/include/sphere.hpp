@@ -24,6 +24,11 @@ namespace raytracer {
         Vector localNormalAt(const Point &) const override;
     };
 
+    class GlassSphere : public Sphere {
+    public:
+        GlassSphere();
+    };
+
 } // namespace raytracer
 
 #endif // __SPHERE_HPP__

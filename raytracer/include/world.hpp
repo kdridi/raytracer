@@ -35,9 +35,11 @@ namespace raytracer {
 
     public:
         Intersections intersect(const Ray &ray) const;
-        Color shadeHit(const Computations &comps, const Shape &shape) const;
-        Color colorAt(const Ray &ray) const;
+        Color shadeHit(const Computations &comps, int remaining = 5) const;
+        Color colorAt(const Ray &ray, int remaining = 5) const;
         bool isShadowed(const Point &point) const;
+        Color reflectedColor(const Computations &comps, int remaining = 5) const;
+        Color refractedColor(const Computations &comps, int remaining = 5) const;
 
     private:
         std::vector<Shape *> m_shapes;

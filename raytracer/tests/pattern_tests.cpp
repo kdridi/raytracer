@@ -128,7 +128,6 @@ TEST_F(PatternTest, A_pattern_with_an_object_transformation)
     object.transform() = raytracer::Matrix::scaling(2, 2, 2);
     TestPattern pattern;
     raytracer::Color c = pattern.patternAtShape(object, raytracer::Point(2, 3, 4));
-    std::cout << "color: " << c << std::endl;
     ASSERT_TRUE(c == raytracer::Color(1, 1.5, 2));
 }
 

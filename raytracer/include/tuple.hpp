@@ -45,8 +45,13 @@ namespace raytracer {
         Tuple cross(const Tuple &) const;
         Tuple reflect(const Tuple &) const;
 
+        Tuple refract(const Tuple &n, double etaiOverEtat) const;
+
     public:
-        double x, y, z, w;
+        double x,
+            y,
+            z,
+            w;
     };
 
 } // namespace raytracer

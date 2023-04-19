@@ -6,7 +6,7 @@
 using namespace raytracer;
 
 Material::Material()
-    : m_color(Color::White()), m_ambient(0.1), m_diffuse(0.9), m_specular(0.9), m_shininess(200.0), pattern(nullptr)
+    : m_color(Color::White()), m_ambient(0.1), m_diffuse(0.9), m_specular(0.9), m_shininess(200.0), pattern(nullptr), reflective(0.0), transparency(0.0), refractiveIndex(1.0)
 {
 }
 

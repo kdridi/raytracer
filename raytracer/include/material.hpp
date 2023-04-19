@@ -31,6 +31,9 @@ namespace raytracer {
         double &shininess();
 
         APattern *pattern;
+        double reflective;
+        double transparency;
+        double refractiveIndex;
 
     public:
         Color lighting(const Shape &shape, const PointLight &light, const Point &point, const Vector &eyev, const Vector &normalv, bool inShadow = false) const;

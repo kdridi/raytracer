@@ -47,19 +47,28 @@ Intersections World::intersect(const Ray &ray) const
     return xs;
 }
 
-Color World::shadeHit(const Computations &comps, const Shape &shape) const
+Color World::shadeHit(const Computations &comps, int remaining) const
 {
     bool shadowed = isShadowed(comps.overPoint);
-    return comps.shape.material().lighting(shape, *light(), comps.point, comps.eyev, comps.normalv, shadowed);
+    Color surface = comps.shape.material().lighting(comps.shape, *light(), comps.point, comps.eyev, comps.normalv, shadowed);
+    Color reflected = reflectedColor(comps, remaining);
+    Color refracted = refractedColor(comps, remaining);
+
+    if (comps.shape.material().reflective > 0 && comps.shape.material().transparency > 0) {
+        double reflectance = comps.schlick();
+        return surface + reflected * reflectance + refracted * (1 - reflectance);
+    }
+
+    return surface + reflected + refracted;
 }
 
-Color World::colorAt(const Ray &ray) const
+Color World::colorAt(const Ray &ray, int remaining) const
 {
     auto xs = intersect(ray);
     auto hit = xs.hit();
     if (hit != nullptr) {
-        auto comps = hit->prepareComputations(ray);
-        return shadeHit(comps, hit->shape());
+        auto comps = hit->prepareComputations(ray, xs);
+        return shadeHit(comps, remaining);
     }
     return Color(0, 0, 0);
 }
@@ -76,4 +85,59 @@ bool World::isShadowed(const Point &point) const
     if (h != nullptr && h->t() < distance)
         return true;
     return false;
+}
+
+Color World::reflectedColor(const Computations &comps, int remaining) const
+{
+    if (remaining <= 0)
+        return Color(0, 0, 0);
+
+    if (comps.shape.material().reflective == 0)
+        return Color(0, 0, 0);
+
+    Ray reflectRay(comps.overPoint, comps.reflectv);
+    Color color = colorAt(reflectRay, remaining - 1) * comps.shape.material().reflective;
+    return color;
+}
+
+Color World::refractedColor(const Computations &comps, int remaining) const
+{
+    if (remaining <= 0)
+        return Color(0, 0, 0);
+
+    if (comps.shape.material().transparency == 0)
+        return Color(0, 0, 0);
+
+    // Find the ratio of first index of refraction to the second.
+    // (Yup, this is inverted from the definition of Snell's Law.)
+
+    // std::cout << "comps: " << comps << std::endl;
+
+    double n_ratio = comps.n1 / comps.n2;
+    // std::cout << "n_ratio: " << n_ratio << std::endl;
+
+    // cos(theta_i) is the same as the dot product of the two vectors
+    double cos_i = comps.eyev.dot(comps.normalv);
+    // std::cout << "cos_i: " << cos_i << std::endl;
+
+    // Find sin(theta_t)^2 via trigonometric identity
+    double sin2_t = n_ratio * n_ratio * (1 - cos_i * cos_i);
+    // std::cout << "sin2_t: " << sin2_t << std::endl;
+
+    if (sin2_t > 1)
+        return Color(0, 0, 0);
+
+    // Find cos(theta_t) via trigonometric identity
+    double cos_t = sqrt(1.0 - sin2_t);
+
+    // Compute the direction of the refracted ray
+    Tuple direction = comps.normalv * (n_ratio * cos_i - cos_t) - comps.eyev * n_ratio;
+
+    // Create the refracted ray
+    Ray refractRay(comps.underPoint, direction);
+
+    // Find the color of the refracted ray, making sure to multiply
+    // by the transparency value to account for any opacity
+
+    return colorAt(refractRay, remaining - 1) * comps.shape.material().transparency;
 }

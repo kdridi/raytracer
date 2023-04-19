@@ -112,8 +112,19 @@ TEST_F(DefaultMaterialTest, Lighting_with_a_pattern_applied)
     raytracer::PointLight light(raytracer::Point(0, 0, -10), raytracer::Color(1, 1, 1));
     raytracer::Color c1 = m.lighting(shape, light, raytracer::Point(0.9, 0, 0), eyev, normalv, false);
     raytracer::Color c2 = m.lighting(shape, light, raytracer::Point(1.1, 0, 0), eyev, normalv, false);
-    std::cout << "c1: " << c1 << std::endl;
-    std::cout << "c2: " << c2 << std::endl;
     EXPECT_TRUE(c1 == raytracer::Color(1, 1, 1));
     EXPECT_TRUE(c2 == raytracer::Color(0, 0, 0));
+}
+
+// Reflectivity for the default material
+TEST_F(DefaultMaterialTest, Reflectivity_for_the_default_material)
+{
+    EXPECT_TRUE(m.reflective == 0);
+}
+
+// Transparency and Refractive Index for the default material
+TEST_F(DefaultMaterialTest, Transparency_and_Refractive_Index_for_the_default_material)
+{
+    EXPECT_TRUE(m.transparency == 0);
+    EXPECT_TRUE(m.refractiveIndex == 1);
 }

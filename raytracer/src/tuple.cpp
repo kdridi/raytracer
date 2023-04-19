@@ -37,8 +37,10 @@ bool Tuple::isPoint() const
 
 Point Tuple::asPoint() const
 {
-    if (!isPoint())
+    if (!isPoint()) {
+        std::cout << "Tuple : " << *this << std::endl;
         throw std::runtime_error("Tuple is not a point");
+    }
     return Point(x, y, z);
 }
 
@@ -49,8 +51,10 @@ bool Tuple::isVector() const
 
 Vector Tuple::asVector() const
 {
-    if (!isVector())
+    if (!isVector()) {
+        std::cout << "Tuple : " << *this << std::endl;
         throw std::runtime_error("Tuple is not a vector");
+    }
     return Vector(x, y, z);
 }
 
@@ -140,4 +144,12 @@ Tuple Tuple::cross(const Tuple &other) const
 Tuple Tuple::reflect(const Tuple &normal) const
 {
     return *this - normal * 2 * this->dot(normal);
+}
+
+Tuple Tuple::refract(const Tuple &n, double etaiOverEtat) const
+{
+    auto costheta = std::fmin(-this->dot(n), 1.0);
+    Tuple rOutPerp = etaiOverEtat * (*this + costheta * n);
+    Tuple rOutParallel = -std::sqrt(std::fabs(1.0 - rOutPerp.magnitude() * rOutPerp.magnitude())) * n;
+    return rOutPerp + rOutParallel;
 }

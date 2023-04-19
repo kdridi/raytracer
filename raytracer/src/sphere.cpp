@@ -35,3 +35,10 @@ Vector Sphere::localNormalAt(const Point &localPoint) const
 {
     return (localPoint - Point(0, 0, 0)).asVector();
 }
+
+GlassSphere::GlassSphere() : Sphere()
+{
+    m_transform = Matrix::identity(4);
+    m_material.transparency = 1.0;
+    m_material.refractiveIndex = 1.5;
+}
