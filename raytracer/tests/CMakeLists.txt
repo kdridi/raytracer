@@ -6,6 +6,7 @@ set(TESTS
     cone_tests.cpp
     cube_tests.cpp
     cylinder_tests.cpp
+    group_tests.cpp
     intersections_tests.cpp
     lights_tests.cpp
     material_tests.cpp

@@ -9,6 +9,14 @@ AShape::AShape()
 {
 }
 
+AShape::~AShape()
+{
+    if (parent) {
+        delete parent;
+        parent = nullptr;
+    }
+}
+
 const Matrix &AShape::transform() const
 {
     return m_transform;
@@ -43,9 +51,29 @@ Intersections AShape::intersect(const Ray &ray) const
 
 Tuple AShape::normalAt(const Tuple &world_point) const
 {
-    Point local_point = (m_transform.inverse() * world_point).asPoint();
+    Point local_point = worldToObject(world_point.asPoint());
     Vector local_normal = localNormalAt(local_point);
-    Tuple world_normal = m_transform.inverse().transpose() * local_normal;
-    world_normal.w = 0;
-    return world_normal.normalize();
+    Tuple world_normal = normalToWorld(local_normal);
+    return world_normal;
+}
+
+Point AShape::worldToObject(const Point &world_point) const
+{
+    Point point = world_point;
+    if (parent != nullptr)
+        point = parent->worldToObject(point);
+
+    return (m_transform.inverse() * point).asPoint();
+}
+
+Vector AShape::normalToWorld(const Vector &local_normal) const
+{
+    Tuple normal = (m_transform.inverse().transpose() * local_normal);
+    normal.w = 0;
+    normal = normal.normalize().asVector();
+
+    if (parent != nullptr)
+        normal = parent->normalToWorld(normal.asVector());
+
+    return normal.asVector();
 }

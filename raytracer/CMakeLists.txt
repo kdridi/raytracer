@@ -19,6 +19,9 @@ set(SOURCES
     include/cylinder.hpp
     src/cylinder.cpp
 
+    include/group.hpp
+    src/group.cpp
+
     include/intersections.hpp
     src/intersections.cpp
 

@@ -7,6 +7,7 @@
 #include "cone.hpp"
 #include "cube.hpp"
 #include "cylinder.hpp"
+#include "group.hpp"
 #include "intersections.hpp"
 #include "lights.hpp"
 #include "material.hpp"

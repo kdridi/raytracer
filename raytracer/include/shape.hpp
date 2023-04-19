@@ -13,6 +13,8 @@ namespace raytracer {
     public:
         virtual Intersections intersect(const Ray &) const = 0;
         virtual Tuple normalAt(const Tuple &) const = 0;
+        virtual Point worldToObject(const Point &) const = 0;
+        virtual Vector normalToWorld(const Vector &) const = 0;
 
     public:
         virtual const Matrix &transform() const = 0;
@@ -29,12 +31,16 @@ namespace raytracer {
         virtual Matrix &transform();
         virtual Material &material();
 
-        virtual Intersections intersect(const Ray &) const final;
-        virtual Tuple normalAt(const Tuple &) const final;
+        Intersections intersect(const Ray &) const final;
+        Tuple normalAt(const Tuple &) const final;
+        Point worldToObject(const Point &) const final;
+        Vector normalToWorld(const Vector &) const final;
+
+        Shape *parent = nullptr;
 
     protected:
         AShape();
-        virtual ~AShape() = default;
+        virtual ~AShape();
 
         AShape(const AShape &) = default;
         AShape &operator=(const AShape &) = default;

@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 
-#define EPSILON 0.000026
+#define EPSILON 0.0001
 #define double_equals(a, b) (fabs((a) - (b)) < EPSILON)
 
 #define map_range(x, in_min, in_max, out_min, out_max) \

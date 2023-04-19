@@ -109,6 +109,11 @@ Intersections::Intersections(std::vector<Intersection> intersections)
 {
 }
 
+Intersections &Intersections::operator+=(const Intersections &other)
+{
+    return add(other);
+}
+
 size_t Intersections::count() const
 {
     return m_intersections.size();

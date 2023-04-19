@@ -73,6 +73,7 @@ namespace raytracer {
 
         Intersections(Intersections &&) = default;
         Intersections &operator=(Intersections &&) = default;
+        Intersections &operator+=(const Intersections &);
 
     public:
         size_t count() const;

@@ -94,3 +94,55 @@ TEST_F(ShapeTest, Computing_the_normal_on_a_transformed_shape)
     auto n = s.normalAt(raytracer::Point(0, sqrt(2) / 2, -sqrt(2) / 2));
     ASSERT_TRUE(n == raytracer::Vector(0, 0.97014, -0.24254));
 }
+
+// A shape has a parent attribute
+TEST_F(ShapeTest, A_shape_has_a_parent_attribute)
+{
+    TestShape s;
+    ASSERT_TRUE(s.parent == nullptr);
+}
+
+// Converting a point from world to object space
+TEST_F(ShapeTest, Converting_a_point_from_world_to_object_space)
+{
+    raytracer::Group g1;
+    g1.transform() = raytracer::Matrix::rotationY(M_PI / 2);
+    raytracer::Group *g2 = new raytracer::Group();
+    g2->transform() = raytracer::Matrix::scaling(2, 2, 2);
+    g1.add(g2);
+    raytracer::Sphere *s = new raytracer::Sphere();
+    s->transform() = raytracer::Matrix::translation(5, 0, 0);
+    g2->add(s);
+    auto p = s->worldToObject(raytracer::Point(-2, 0, -10));
+    ASSERT_TRUE(p == raytracer::Point(0, 0, -1));
+}
+
+// Converting a normal from object to world space
+TEST_F(ShapeTest, Converting_a_normal_from_object_to_world_space)
+{
+    raytracer::Group g1;
+    g1.transform() = raytracer::Matrix::rotationY(M_PI / 2);
+    raytracer::Group *g2 = new raytracer::Group();
+    g2->transform() = raytracer::Matrix::scaling(1, 2, 3);
+    g1.add(g2);
+    raytracer::Sphere *s = new raytracer::Sphere();
+    s->transform() = raytracer::Matrix::translation(5, 0, 0);
+    g2->add(s);
+    auto n = s->normalToWorld(raytracer::Vector(sqrt(3) / 3, sqrt(3) / 3, sqrt(3) / 3));
+    ASSERT_TRUE(n == raytracer::Vector(0.2857, 0.4286, -0.8571));
+}
+
+// Finding the normal on a child object
+TEST_F(ShapeTest, Finding_the_normal_on_a_child_object)
+{
+    raytracer::Group g1;
+    g1.transform() = raytracer::Matrix::rotationY(M_PI / 2);
+    raytracer::Group *g2 = new raytracer::Group();
+    g2->transform() = raytracer::Matrix::scaling(1, 2, 3);
+    g1.add(g2);
+    raytracer::Sphere *s = new raytracer::Sphere();
+    s->transform() = raytracer::Matrix::translation(5, 0, 0);
+    g2->add(s);
+    auto n = s->normalAt(raytracer::Point(1.7321, 1.1547, -5.5774));
+    ASSERT_TRUE(n == raytracer::Vector(0.2857, 0.4286, -0.8571));
+}
