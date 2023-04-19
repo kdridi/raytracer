@@ -4,6 +4,7 @@
 #include "camera.hpp"
 #include "canvas.hpp"
 #include "color.hpp"
+#include "cube.hpp"
 #include "intersections.hpp"
 #include "lights.hpp"
 #include "material.hpp"

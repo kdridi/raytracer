@@ -3,6 +3,7 @@ set(TESTS
     camera_tests.cpp
     canvas_tests.cpp
     color_tests.cpp
+    cube_tests.cpp
     intersections_tests.cpp
     lights_tests.cpp
     material_tests.cpp
