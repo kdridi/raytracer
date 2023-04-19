@@ -10,8 +10,14 @@ set(SOURCES
     include/color.hpp
     src/color.cpp
 
+    include/cone.hpp
+    src/cone.cpp
+
     include/cube.hpp
     src/cube.cpp
+
+    include/cylinder.hpp
+    src/cylinder.cpp
 
     include/intersections.hpp
     src/intersections.cpp

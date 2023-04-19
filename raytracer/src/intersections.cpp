@@ -104,6 +104,11 @@ Intersections::Intersections(std::initializer_list<Intersection> intersections)
 {
 }
 
+Intersections::Intersections(std::vector<Intersection> intersections)
+    : m_intersections(intersections)
+{
+}
+
 size_t Intersections::count() const
 {
     return m_intersections.size();

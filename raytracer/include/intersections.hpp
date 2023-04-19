@@ -65,6 +65,7 @@ namespace raytracer {
     public:
         Intersections();
         Intersections(std::initializer_list<Intersection>);
+        Intersections(std::vector<Intersection>);
         virtual ~Intersections() = default;
 
         Intersections(const Intersections &) = default;
