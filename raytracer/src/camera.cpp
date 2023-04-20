@@ -5,6 +5,8 @@
 #include "vector.hpp"
 #include "world.hpp"
 
+// #include <progressbar/progressbar.h>
+
 using namespace raytracer;
 
 Camera::Camera(int hsize, int vsize, double fieldOfView)
@@ -34,7 +36,7 @@ Ray Camera::rayForPixel(int px, int py) const
     return Ray(origin, direction);
 }
 
-Canvas Camera::render(const World &world) const
+Canvas Camera::render(const World &world, ProgressBar *pb) const
 {
     Canvas image(hsize, vsize);
 
@@ -45,6 +47,8 @@ Canvas Camera::render(const World &world) const
             Ray r = rayForPixel(x, y);
             Color c = world.colorAt(r);
             image.writePixel(x, y, c);
+            if (pb)
+                pb->tick();
         }
     }
 

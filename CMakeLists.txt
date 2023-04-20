@@ -3,6 +3,7 @@ project(raytracer VERSION 0.1 LANGUAGES CXX)
 
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 add_subdirectory(vendor/github.com/google/googletest.git)
+add_subdirectory(vendor/github.com/doches/progressbar.git)
 
 find_package(OpenMP)
 if (OPENMP_FOUND)

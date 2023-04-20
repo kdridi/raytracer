@@ -1,3 +1,6 @@
+find_package(Curses)
+
+
 add_executable(01 01.cpp)
 target_link_libraries(01 raytracer)
 
@@ -30,3 +33,6 @@ target_link_libraries(10 raytracer)
 
 add_executable(11 11.cpp)
 target_link_libraries(11 raytracer)
+
+add_executable(12 12.cpp)
+target_link_libraries(12 raytracer progressbar statusbar ${CURSES_LIBRARIES})

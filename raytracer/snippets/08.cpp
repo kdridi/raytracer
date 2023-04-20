@@ -10,7 +10,8 @@ int main()
     floor->material().color() = raytracer::Color(1, 0.9, 0.9);
     floor->material().specular() = 0;
     floor->material().pattern = new raytracer::RingPattern(raytracer::Color::Red(), raytracer::Color::White());
-    // floor->material().pattern->transform = raytracer::Matrix::scaling(1, 0, 1);
+    floor->material().pattern = new raytracer::GradientPattern(raytracer::Color::Red(), raytracer::Color::White());
+    floor->material().pattern->transform = raytracer::Matrix::scaling(1000, 1000, 1000);
     world.shapes().push_back(floor);
 
     raytracer::Sphere *middle = new raytracer::Sphere();
@@ -23,8 +24,17 @@ int main()
     middle->material().pattern->transform = raytracer::Matrix::scaling(0.25, 0.25, 0.25);
     world.shapes().push_back(middle);
 
-    raytracer::Sphere *right = new raytracer::GlassSphere();
-    right->transform() = raytracer::Matrix::translation(1.5, 0.5, -0.5) * raytracer::Matrix::scaling(0.5, 0.5, 0.5);
+    raytracer::Sphere *right = new raytracer::Sphere();
+    right->transform() = raytracer::Matrix::translation(0.0, 0.5, -1.0) * raytracer::Matrix::scaling(0.5, 0.5, 0.5);
+    right->material() = raytracer::Material();
+    right->material().color() = raytracer::Color(0, 0, 0.2);
+    right->material().ambient() = 0;
+    right->material().diffuse() = 0.4;
+    right->material().specular() = 0.9;
+    right->material().shininess() = 300;
+    right->material().reflective = 0.9;
+    right->material().transparency = 0.9;
+    right->material().refractiveIndex = 1.5;
     world.shapes().push_back(right);
 
     raytracer::Sphere *left = new raytracer::Sphere();

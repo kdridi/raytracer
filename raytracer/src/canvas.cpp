@@ -93,3 +93,10 @@ std::string Canvas::toPPM() const
 
     return ss.str();
 }
+
+void Canvas::savePPM(const std::string &filePath) const
+{
+    std::ofstream file(filePath);
+    file << toPPM();
+    file.close();
+}

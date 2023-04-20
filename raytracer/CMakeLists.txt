@@ -34,6 +34,9 @@ set(SOURCES
     include/matrix.hpp
     src/matrix.cpp
 
+    include/obj_file_parser.hpp
+    src/obj_file_parser.cpp
+
     include/pattern.hpp
     src/pattern.cpp
 
@@ -52,6 +55,9 @@ set(SOURCES
     include/sphere.hpp
     src/sphere.cpp
 
+    include/triangle.hpp
+    src/triangle.cpp
+
     include/tuple.hpp
     src/tuple.cpp
 
@@ -63,7 +69,10 @@ set(SOURCES
 )
 
 add_library(raytracer ${SOURCES})
-target_include_directories(raytracer PUBLIC include)
+target_include_directories(raytracer PUBLIC
+${CMAKE_CURRENT_SOURCE_DIR}/include
+${CMAKE_CURRENT_SOURCE_DIR}/../vendor/github.com/doches/progressbar.git/include
+)
 target_compile_features(raytracer PUBLIC cxx_std_23)
 
 install(

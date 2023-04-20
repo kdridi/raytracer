@@ -26,6 +26,7 @@ namespace raytracer {
 
     public:
         std::string toPPM() const;
+        void savePPM(const std::string &filePath) const;
 
     private:
         int m_width;

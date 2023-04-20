@@ -9,12 +9,17 @@ namespace raytracer {
     class Canvas;
     class World;
 
+    class ProgressBar {
+    public:
+        virtual void tick() = 0;
+    };
+
     class Camera {
     public:
         Camera(int hsize, int vsize, double fieldOfView);
 
         Ray rayForPixel(int px, int py) const;
-        Canvas render(const World &world) const;
+        Canvas render(const World &world, ProgressBar *pb = nullptr) const;
 
     public:
         int hsize;
