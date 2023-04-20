@@ -14,10 +14,7 @@ namespace raytracer {
         Computations(const Intersection &intersection, const Ray &ray);
 
         Computations(const Computations &) = default;
-        Computations &operator=(const Computations &) = default;
-
         Computations(Computations &&) = default;
-        Computations &operator=(Computations &&) = default;
 
         double schlick() const;
 

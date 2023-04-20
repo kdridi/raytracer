@@ -11,6 +11,8 @@ namespace raytracer {
 
     class APattern {
     public:
+        virtual ~APattern() = default;
+
         APattern(const Color &a, const Color &b);
         Color patternAtShape(const Shape &, const Point &point) const;
 

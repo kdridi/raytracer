@@ -63,23 +63,27 @@ Computations Intersection::prepareComputations(const Ray &ray, const Intersectio
     const Intersection *hit = this;
 
     xs.forEachIntersection([&](const Intersection &i) {
-        if (hit == &i)
-            if (containers.empty())
+        if (hit == &i) {
+            if (containers.empty()) {
                 comps.n1 = 1.0;
-            else
+            } else {
                 comps.n1 = containers.back()->material().refractiveIndex;
-
+            }
+        }
         auto it = std::find(containers.begin(), containers.end(), &i.shape());
-        if (it != containers.end())
+        if (it != containers.end()) {
             containers.erase(it);
-        else
+        } else {
             containers.push_back(&i.shape());
+        }
 
-        if (hit == &i)
-            if (containers.empty())
+        if (hit == &i) {
+            if (containers.empty()) {
                 comps.n2 = 1.0;
-            else
+            } else {
                 comps.n2 = containers.back()->material().refractiveIndex;
+            }
+        }
     });
 
     return comps;

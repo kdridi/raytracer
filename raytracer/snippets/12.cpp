@@ -73,7 +73,7 @@ int main()
         world.shapes().push_back(triangle);
     }
 
-    raytracer::Camera camera(512, 512, M_PI / 3);
+    raytracer::Camera camera(1024, 1024, M_PI / 3);
     camera.transform = raytracer::Matrix::viewTransform(raytracer::Point(0, 3.0, -5.0), raytracer::Point(0, 0, 0), raytracer::Vector(0, 1, 0));
 
     ProgressBar progressbar("Rendering", camera.hsize * camera.vsize);

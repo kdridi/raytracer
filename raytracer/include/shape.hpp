@@ -11,6 +11,16 @@ namespace raytracer {
 
     class Shape {
     public:
+        Shape() = default;
+        virtual ~Shape() = default;
+
+        Shape(const Shape &) = default;
+        Shape &operator=(const Shape &) = default;
+
+        Shape(Shape &&) = default;
+        Shape &operator=(Shape &&) = default;
+
+    public:
         virtual Intersections intersect(const Ray &) const = 0;
         virtual Tuple normalAt(const Tuple &) const = 0;
         virtual Point worldToObject(const Point &) const = 0;
