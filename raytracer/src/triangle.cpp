@@ -36,3 +36,8 @@ Vector Triangle::localNormalAt(const Point &) const
 {
     return normal;
 }
+
+Bounds Triangle::bounds() const
+{
+    return Bounds(p1).add(p2).add(p3);
+}

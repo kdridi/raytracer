@@ -1,5 +1,7 @@
-find_package(Curses)
-
+# add -fsanitize=address to CMAKE_CXX_FLAGS to enable address sanitizer if debug build
+if(CMAKE_BUILD_TYPE MATCHES Debug)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
+endif()
 
 add_executable(01 01.cpp)
 target_link_libraries(01 raytracer)
@@ -35,4 +37,4 @@ add_executable(11 11.cpp)
 target_link_libraries(11 raytracer)
 
 add_executable(12 12.cpp)
-target_link_libraries(12 raytracer progressbar statusbar ${CURSES_LIBRARIES})
+target_link_libraries(12 raytracer)

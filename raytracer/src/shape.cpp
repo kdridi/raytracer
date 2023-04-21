@@ -5,7 +5,7 @@
 using namespace raytracer;
 
 AShape::AShape()
-    : m_transform(Matrix::identity(4))
+    : parent(nullptr), m_transform(Matrix::identity(4)), m_material(Material())
 {
 }
 

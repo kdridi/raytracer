@@ -22,6 +22,7 @@ namespace raytracer {
     public:
         Intersections localIntersect(const Ray &) const override;
         Vector localNormalAt(const Point &) const override;
+        Bounds bounds() const override;
     };
 
     class GlassSphere : public Sphere {

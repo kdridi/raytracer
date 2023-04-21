@@ -20,6 +20,11 @@ public:
         return (point - raytracer::Point(0, 0, 0)).asVector();
     }
 
+    virtual raytracer::Bounds bounds() const
+    {
+        return raytracer::Bounds(raytracer::Point(-1, -1, -1), raytracer::Point(1, 1, 1));
+    }
+
     raytracer::Ray savedRay;
 };
 

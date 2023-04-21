@@ -12,6 +12,7 @@ namespace raytracer {
 
         virtual Intersections localIntersect(const Ray &r) const;
         virtual Vector localNormalAt(const Point &p) const;
+        virtual Bounds bounds() const;
 
     private:
         std::pair<double, double> checkAxis(double origin, double direction) const;

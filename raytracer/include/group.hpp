@@ -8,6 +8,7 @@ namespace raytracer {
     class Group : public AShape {
     public:
         static Shape *Hexagon();
+        static Group *CreateOctreeGroup(std::vector<Shape *> &shapes, int depth = 3);
 
     public:
         Group();
@@ -16,6 +17,7 @@ namespace raytracer {
     public:
         Intersections localIntersect(const Ray &) const override;
         Vector localNormalAt(const Point &) const override;
+        Bounds bounds() const override;
 
     public:
         void add(Shape *);

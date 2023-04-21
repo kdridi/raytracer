@@ -14,6 +14,7 @@ namespace raytracer {
 
         virtual Intersections localIntersect(const Ray &) const;
         virtual Vector localNormalAt(const Point &) const;
+        virtual Bounds bounds() const;
 
         const Point p1;
         const Point p2;

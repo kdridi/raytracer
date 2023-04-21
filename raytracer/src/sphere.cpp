@@ -36,6 +36,11 @@ Vector Sphere::localNormalAt(const Point &localPoint) const
     return (localPoint - Point(0, 0, 0)).asVector();
 }
 
+Bounds Sphere::bounds() const
+{
+    return Bounds(Point(-1, -1, -1)).add(Point(1, 1, 1));
+}
+
 GlassSphere::GlassSphere() : Sphere()
 {
     m_transform = Matrix::identity(4);

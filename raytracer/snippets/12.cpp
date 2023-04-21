@@ -61,6 +61,7 @@ int main()
     floor->material().pattern = new raytracer::RingPattern(raytracer::Color::Red(), raytracer::Color::White());
     world.shapes().push_back(floor);
 
+    std::vector<raytracer::Shape *> shapes;
     raytracer::OBJFileParser parser = raytracer::OBJFileParser::ParseFile("teapot.obj");
     for (auto &face : parser.faces) {
         face.material() = raytracer::Material();
@@ -70,16 +71,18 @@ int main()
         // face.material().pattern = new raytracer::PerlinPattern(raytracer::Color::Green(), raytracer::Color::Blue());
         // face.material().pattern->transform = raytracer::Matrix::scaling(0.25, 0.25, 0.25);
         raytracer::Triangle *triangle = new raytracer::Triangle(face);
-        world.shapes().push_back(triangle);
+        shapes.push_back(triangle);
     }
+    raytracer::Shape *teapot = raytracer::Group::CreateOctreeGroup(shapes, 0);
+    world.shapes().push_back(teapot);
 
-    raytracer::Camera camera(1024, 1024, M_PI / 3);
+    raytracer::Camera camera(720, 720, M_PI / 3);
     camera.transform = raytracer::Matrix::viewTransform(raytracer::Point(0, 3.0, -5.0), raytracer::Point(0, 0, 0), raytracer::Vector(0, 1, 0));
 
     ProgressBar progressbar("Rendering", camera.hsize * camera.vsize);
     raytracer::Canvas canvas = camera.render(world, &progressbar);
 
-    canvas.savePPM("out.ppm");
+    canvas.savePPM("12.ppm");
 
     return 0;
 }

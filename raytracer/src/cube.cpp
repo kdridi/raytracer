@@ -35,6 +35,11 @@ Vector Cube::localNormalAt(const Point &p) const
     return Vector(0, 0, p.z);
 }
 
+Bounds Cube::bounds() const
+{
+    return Bounds(Point(-1, -1, -1), Point(1, 1, 1));
+}
+
 std::pair<double, double> Cube::checkAxis(double origin, double direction) const
 {
     auto tmin_numerator = 0 - 1 - origin;

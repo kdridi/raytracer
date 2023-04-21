@@ -56,6 +56,11 @@ Vector Cylinder::localNormalAt(const Point &p) const
     return Vector(p.x, 0, p.z);
 }
 
+Bounds Cylinder::bounds() const
+{
+    return Bounds(Point(-1, minimum, -1), Point(1, maximum, 1));
+}
+
 bool Cylinder::checkCaps(const Ray &r, double t)
 {
     auto d = r.direction();

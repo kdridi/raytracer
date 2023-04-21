@@ -69,6 +69,11 @@ Vector Cone::localNormalAt(const Point &p) const
     return Vector(x, y, z);
 }
 
+Bounds Cone::bounds() const
+{
+    return Bounds(Point(-1, minimum, -1), Point(1, maximum, 1));
+}
+
 bool Cone::checkCaps(const Ray &r, double t)
 {
     auto i = r.position(t);

@@ -13,6 +13,7 @@ namespace raytracer {
 
         virtual Intersections localIntersect(const Ray &r) const override;
         virtual Vector localNormalAt(const Point &p) const override;
+        virtual Bounds bounds() const override;
 
         double minimum;
         double maximum;
