@@ -11,6 +11,6 @@ jobs:
           fetch-depth: 0
           submodules: recursive
       - name: Build with Cmake
-        run: mkdir build && cd build && cmake .. && make VERBOSE=1
+        run: cmake --no-warn-unused-cli -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_BUILD_TYPE:STRING=Debug -S$(pwd) -B$(pwd)/build -G "Unix Makefiles" && cmake --build build --config Debug --target all -j 10 --verbose
       - name: Run tests
         run: cd build && raytracer/tests/tests
