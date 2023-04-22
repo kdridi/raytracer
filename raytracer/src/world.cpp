@@ -8,20 +8,20 @@
 
 using namespace raytracer;
 
-World World::Default()
+World *World::Default()
 {
-    World world;
-    world.light() = new PointLight(Point(-10, 10, -10), Color(1, 1, 1));
+    World *world = new World();
+    world->light() = new PointLight(Point(-10, 10, -10), Color(1, 1, 1));
 
     Sphere *s1 = new Sphere();
     s1->material().color() = Color(0.8, 1.0, 0.6);
     s1->material().diffuse() = 0.7;
     s1->material().specular() = 0.2;
-    world.shapes().push_back(s1);
+    world->shapes().push_back(s1);
 
     Sphere *s2 = new Sphere();
     s2->transform() = Matrix::scaling(0.5, 0.5, 0.5);
-    world.shapes().push_back(s2);
+    world->shapes().push_back(s2);
 
     return world;
 }
@@ -35,7 +35,9 @@ World::~World()
 {
     for (auto shape : m_shapes)
         delete shape;
-    delete m_light;
+
+    if (m_light != nullptr)
+        delete m_light;
 }
 
 Intersections World::intersect(const Ray &ray) const

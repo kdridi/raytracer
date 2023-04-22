@@ -73,10 +73,10 @@ int main()
         raytracer::Triangle *triangle = new raytracer::Triangle(face);
         shapes.push_back(triangle);
     }
-    raytracer::Shape *teapot = raytracer::Group::CreateOctreeGroup(shapes, 0);
+    raytracer::Shape *teapot = new raytracer::KDTree(shapes, 8);
     world.shapes().push_back(teapot);
 
-    raytracer::Camera camera(720, 720, M_PI / 3);
+    raytracer::Camera camera(256, 256, M_PI / 3);
     camera.transform = raytracer::Matrix::viewTransform(raytracer::Point(0, 3.0, -5.0), raytracer::Point(0, 0, 0), raytracer::Vector(0, 1, 0));
 
     ProgressBar progressbar("Rendering", camera.hsize * camera.vsize);

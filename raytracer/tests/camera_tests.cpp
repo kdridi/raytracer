@@ -62,12 +62,13 @@ TEST_F(CameraTest, Constructing_a_ray_when_the_camera_is_transformed)
 // Rendering a world with a camera
 TEST_F(CameraTest, Rendering_a_world_with_a_camera)
 {
-    raytracer::World w = raytracer::World::Default();
+    raytracer::World *w = raytracer::World::Default();
     raytracer::Camera c(11, 11, M_PI / 2);
     raytracer::Point from(0, 0, -5);
     raytracer::Point to(0, 0, 0);
     raytracer::Vector up(0, 1, 0);
     c.transform = raytracer::Matrix::viewTransform(from, to, up);
-    raytracer::Canvas image = c.render(w);
+    raytracer::Canvas image = c.render(*w);
     EXPECT_TRUE(image.pixelAt(5, 5) == raytracer::Color(0.38066, 0.47583, 0.2855));
+    delete w;
 }

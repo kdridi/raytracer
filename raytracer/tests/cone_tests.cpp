@@ -47,7 +47,6 @@ TEST_F(ConeTest, Intersecting_a_cones_end_caps)
         raytracer::Vector direction = raytracer::Vector ray_direction.normalize().asVector(); \
         raytracer::Ray r(raytracer::Point ray_origin, direction);                             \
         raytracer::Intersections xs = c.localIntersect(r);                                    \
-        std::cout << "xs.count() = " << xs.count() << std::endl;                              \
         ASSERT_TRUE(xs.count() == n);                                                         \
     }
 

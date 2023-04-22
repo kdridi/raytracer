@@ -35,52 +35,6 @@ Shape *Group::Hexagon()
     return hex;
 }
 
-Group *Group::CreateOctreeGroup(std::vector<Shape *> &shapes, int depth)
-{
-    if (shapes.empty())
-        return nullptr;
-
-    auto group = new Group();
-
-    if (depth <= 0) {
-        for (auto &shape : shapes)
-            group->add(shape);
-        return group;
-    }
-
-    // calculate bounds
-    Bounds bounds(shapes.back()->bounds());
-    for (auto &shape : shapes)
-        bounds += shape->bounds();
-
-    // calculate center
-    auto center = bounds.center();
-
-    std::vector<Shape *> subShapes[8];
-    for (auto &shape : shapes) {
-        auto shapeBounds = shape->bounds();
-        auto shapeCenter = shapeBounds.center();
-
-        int index = 0;
-        if (shapeCenter.x > center.x)
-            index |= 1;
-        if (shapeCenter.y > center.y)
-            index |= 2;
-        if (shapeCenter.z > center.z)
-            index |= 4;
-
-        subShapes[index].push_back(shape);
-    }
-
-    for (int i = 0; i < 8; ++i) {
-        auto subGroup = CreateOctreeGroup(subShapes[i], depth - 1);
-        if (subGroup)
-            group->add(subGroup);
-    }
-
-    return group;
-}
-
 Group::Group()
     : AShape()
 {
@@ -88,8 +42,16 @@ Group::Group()
 
 Group::~Group()
 {
-    while (!empty())
-        remove(&(*this)[0]);
+    std::cout << "Group::~Group(): " << this << std::endl;
+    while (m_shapes.size() > 0) {
+        Shape *shape = m_shapes.back();
+        m_shapes.pop_back();
+
+        assert(shape != this);
+        assert(shape != nullptr);
+        delete shape;
+    }
+    std::cout << "Group::~Group() done: " << this << std::endl;
 }
 
 Intersections Group::localIntersect(const Ray &ray) const

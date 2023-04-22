@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(raytracer VERSION 0.1 LANGUAGES CXX)
 
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
+endif()
+
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 add_subdirectory(vendor/github.com/google/googletest.git)
 add_subdirectory(vendor/github.com/doches/progressbar.git)

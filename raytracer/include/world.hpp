@@ -14,7 +14,7 @@ namespace raytracer {
 
     class World {
     public:
-        static World Default();
+        static World *Default();
 
     public:
         World();

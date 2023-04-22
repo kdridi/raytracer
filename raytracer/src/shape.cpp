@@ -11,10 +11,6 @@ AShape::AShape()
 
 AShape::~AShape()
 {
-    if (parent) {
-        delete parent;
-        parent = nullptr;
-    }
 }
 
 const Matrix &AShape::transform() const
