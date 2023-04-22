@@ -42,7 +42,6 @@ Group::Group()
 
 Group::~Group()
 {
-    std::cout << "Group::~Group(): " << this << std::endl;
     while (m_shapes.size() > 0) {
         Shape *shape = m_shapes.back();
         m_shapes.pop_back();
@@ -51,7 +50,6 @@ Group::~Group()
         assert(shape != nullptr);
         delete shape;
     }
-    std::cout << "Group::~Group() done: " << this << std::endl;
 }
 
 Intersections Group::localIntersect(const Ray &ray) const

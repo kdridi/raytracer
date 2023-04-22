@@ -70,7 +70,7 @@ int main()
     hexagone->material().specular() = 0.3;
     world.shapes().push_back(hexagone);
 
-    raytracer::Camera camera(1024, 1024, M_PI / 3);
+    raytracer::Camera camera(128, 128, M_PI / 3);
     camera.transform = raytracer::Matrix::viewTransform(raytracer::Point(0, 10.0, -10.0), raytracer::Point(0, 0, 0), raytracer::Vector(0, 1, 0));
 
     ProgressBar progressbar("Rendering", camera.hsize * camera.vsize);

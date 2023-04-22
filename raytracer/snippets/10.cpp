@@ -64,12 +64,11 @@ int main()
     cone->material().specular() = 0.3;
     world.shapes().push_back(cone);
 
-    raytracer::Camera camera(1024, 1024, M_PI / 3);
+    raytracer::Camera camera(256, 256, M_PI / 3);
     camera.transform = raytracer::Matrix::viewTransform(raytracer::Point(0, 1.5, -5), raytracer::Point(0, 1, 0), raytracer::Vector(0, 1, 0));
 
     raytracer::Canvas canvas = camera.render(world);
-
-    std::cout << canvas.toPPM();
+    canvas.savePPM("10.ppm");
 
     return 0;
 }

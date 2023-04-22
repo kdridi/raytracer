@@ -38,15 +38,11 @@ namespace raytracer {
     public:
         KDTree(std::vector<Shape *> shapes, int maxDepth = 10) : AShape(), m_maxDepth(maxDepth)
         {
-            for (auto &shape : shapes)
-                m_shapes.push_back(shape);
-            m_root = build(0, m_shapes.begin(), m_shapes.end(), 0);
+            m_root = build(0, shapes.begin(), shapes.end(), 0);
         }
 
         ~KDTree()
         {
-            for (auto &shape : m_shapes)
-                delete shape;
             delete m_root;
         }
 
@@ -72,6 +68,13 @@ namespace raytracer {
     private:
         struct Node {
             Node() : bounds(Point(0, 0, 0)), left(nullptr), right(nullptr), shapes() {}
+            ~Node()
+            {
+                for (auto shape : shapes)
+                    delete shape;
+                delete left;
+                delete right;
+            }
             Bounds bounds;
             Node *left;
             Node *right;
@@ -129,7 +132,6 @@ namespace raytracer {
 
         int m_maxDepth;
         Node *m_root;
-        std::vector<Shape *> m_shapes;
     };
 
 } // namespace raytracer
